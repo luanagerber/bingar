@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct bingarApp: App {
+struct BingarApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
