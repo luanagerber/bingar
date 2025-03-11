@@ -12,14 +12,16 @@ struct ContentView: View {
 
         ZStack {
             
-            Color.blue.opacity(0.3).edgesIgnoringSafeArea(.all)
+            Color.green.opacity(0.3).edgesIgnoringSafeArea(.all)
+            Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("BINGAR")
-                
-                Image(systemName: "globe")
+                Image(systemName: "camera")
                     .imageScale(.large)
-                    .foregroundStyle(.tint)
+                    .foregroundStyle(.gray)
+                Text("Scanear Cartela")
+                    .bold()
+                
                 
                 Spacer()
                 
