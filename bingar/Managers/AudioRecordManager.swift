@@ -40,16 +40,16 @@ struct AudioRecordManager: View {
             try audioSession.setActive(true)
             
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let audioFilename = documentPath.appendingPathComponent("temp_recording.wav")
+            let audioFilename = documentPath.appendingPathComponent("temp_recording2.wav")
             recordingURL = audioFilename
             
             let settings: [String: Any] = [
                 AVFormatIDKey: Int(kAudioFormatLinearPCM), // Use Linear PCM for WAV
-                AVSampleRateKey: 44100, // Standard CD-quality sample rate
-                AVNumberOfChannelsKey: 2, // Stereo recording
-                AVLinearPCMBitDepthKey: 16, // 16-bit depth for standard quality
-                AVLinearPCMIsBigEndianKey: false, // Little-endian format (default)
-                AVLinearPCMIsFloatKey: false // Standard integer samples
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 2,
+                AVLinearPCMBitDepthKey: 16,
+                AVLinearPCMIsBigEndianKey: false,
+                AVLinearPCMIsFloatKey: false
             ]
             
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -63,33 +63,39 @@ struct AudioRecordManager: View {
         }
     }
     
-    func playSound(URL: URL) {
-//            
-//        let audioPlayer = try AVAudioPlayer(contentsOf: URL)
-//        audioPlayer.numberOfLoops = 1
-//        audioPlayer.play()
-    }
+    func playSound() {
+           guard let fileURL = recordingURL else { return }
+           
+           do {
+               // Create an AVAudioPlayer instance and play the sound
+               let audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+               audioPlayer.numberOfLoops = 1
+               audioPlayer.volume = 1.0 // Volume should be between 0.0 and 1.0
+               audioPlayer.play()
+           } catch {
+               print("Error playing sound: \(error.localizedDescription)")
+           }
+       }
     
     func stopRecording() {
-//        AVAudioPlayer.play
-        
-        audioRecorder?.stop()
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        try? audioSession.setActive(false)
-        
-        if let fileURL = recordingURL {
-            do {
-                if FileManager.default.fileExists(atPath: fileURL.path) {
-                    print("File exists, deleting...")
-                    try FileManager.default.removeItem(at: fileURL)
-                    print("Recording file deleted successfully")
+            audioRecorder?.stop()
+//            playSound()
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setActive(false)
+            
+            if let fileURL = recordingURL {
+                do {
+                    if FileManager.default.fileExists(atPath: fileURL.path) {
+                        print("File exists, deleting...")
+//                        try FileManager.default.removeItem(at: fileURL)
+                        print("Recording file deleted successfully")
+                    }
+                } catch {
+                    print("Error deleting recording file: \(error.localizedDescription)")
                 }
-            } catch {
-                print("Error deleting recording file: \(error.localizedDescription)")
             }
+            
+            recordingURL = nil
         }
-        
-        recordingURL = nil
-    }
 }
