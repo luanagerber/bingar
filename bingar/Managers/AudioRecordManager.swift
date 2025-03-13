@@ -6,9 +6,7 @@ struct AudioRecordManager: View {
     @State private var audioRecorder: AVAudioRecorder?
     
     @State private var recordingURL: URL?
-    
-    @State private var showPermissionAlert = false
-    
+        
     var body: some View {
         Button(action: {
             handleButtonTap()
@@ -44,12 +42,12 @@ struct AudioRecordManager: View {
             recordingURL = audioFilename
             
             let settings: [String: Any] = [
-                AVFormatIDKey: Int(kAudioFormatLinearPCM), // Use Linear PCM for WAV
-                AVSampleRateKey: 44100, // Standard CD-quality sample rate
-                AVNumberOfChannelsKey: 2, // Stereo recording
-                AVLinearPCMBitDepthKey: 16, // 16-bit depth for standard quality
-                AVLinearPCMIsBigEndianKey: false, // Little-endian format (default)
-                AVLinearPCMIsFloatKey: false // Standard integer samples
+                AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 2,
+                AVLinearPCMBitDepthKey: 16,
+                AVLinearPCMIsBigEndianKey: false,
+                AVLinearPCMIsFloatKey: false
             ]
             
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
