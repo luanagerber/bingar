@@ -29,9 +29,22 @@
 		4F781C212D80D049009F0370 /* bingarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bingarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4F55DB522D836B390028197E /* Exceptions for "bingar" folder in "bingar" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4F781C062D80D047009F0370 /* bingar */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4F781C092D80D047009F0370 /* bingar */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4F55DB522D836B390028197E /* Exceptions for "bingar" folder in "bingar" target */,
+			);
 			path = bingar;
 			sourceTree = "<group>";
 		};
