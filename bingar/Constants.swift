@@ -22,12 +22,13 @@ struct BingoTitle: View {
 
 struct BingoNumber: View {
     let number: Int
+    var isActive: Bool
     
     var body: some View {
         Text("\(number)")
             .font(.title)
             .fontWeight(.regular)
-            .foregroundStyle(.black)
+            .foregroundStyle(isActive ? .red : .black)
             .multilineTextAlignment(.center)
     }
 }

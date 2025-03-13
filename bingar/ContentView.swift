@@ -45,7 +45,7 @@ struct ContentView: View {
                                                     // Percorrendo os números da coluna
                                                     ForEach(0..<5, id: \.self) { line in
                                                         if let number = bingoModel.matrix[column][line] {
-                                                            BingoNumber(number: number)
+                                                            BingoNumber(number: number, isActive: bingoModel.isActive(number))
                                                         } else {
                                                             BingoSymbol(symbol: "star") // Espaço livre no centro
                                                         }
