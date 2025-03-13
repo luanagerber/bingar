@@ -18,7 +18,8 @@ struct ContentView: View {
             VStack {
                 Image(systemName: "camera")
                     .imageScale(.large)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.black.opacity(0.7))
+                    .padding(.bottom, 2)
                 Text("Scanear Cartela")
                     .bold()
                 
@@ -53,7 +54,7 @@ struct ContentView: View {
                         BingoTitle(text: "N")
                         BingoNumber(number: 36)
                         BingoNumber(number: 43)
-                        BingoNumber(number: 00)
+                        BingoSymbol(symbol: "star")
                         BingoNumber(number: 33)
                         BingoNumber(number: 41)
                     }
@@ -77,6 +78,13 @@ struct ContentView: View {
                 }.frame(width: 350, height: 370)
                 
                 Spacer()
+                
+                Image(systemName: "microphone")
+                    .imageScale(.large)
+                    .foregroundStyle(.black.opacity(0.7))
+                    .padding(.bottom, 2)
+                Text("Gravar voz")
+                    .bold()
             }
             .padding()
             

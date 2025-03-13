@@ -36,10 +36,9 @@ struct BingoSymbol: View {
     let symbol: String
     
     var body: some View {
-        Text(symbol)
-            .font(.title)
-            .fontWeight(.regular)
-            .foregroundStyle(.black)
-            .multilineTextAlignment(.center)
+        Image(systemName: symbol)
+            .imageScale(.large)
+            .foregroundStyle(.gray)
+        .padding(.vertical, 4)
     }
 }
