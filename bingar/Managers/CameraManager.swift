@@ -1,7 +1,13 @@
+////
+////  CameraManager.swift
+////  bingar
+////
+////  Created by Luana Gerber on 13/03/25.
+////
 //
-//  CameraManager.swift
-//  bingar
+//import SwiftUI
+//import AVFoundation
 //
-//  Created by Luana Gerber on 13/03/25.
-//
-
+//struct CameraRecordManager: View {    
+//    
+//}

@@ -23,13 +23,13 @@ struct AudioRecordManager: View {
     }
     
     private func handleButtonTap() {
-            if isRecording {
-                stopRecording()
-                isRecording = false
-            } else {
-                startRecording()
-                isRecording = true
-            }
+        if isRecording {
+            stopRecording()
+            isRecording = false
+        } else {
+            startRecording()
+            isRecording = true
+        }
     }
     
     func startRecording() {
@@ -63,23 +63,32 @@ struct AudioRecordManager: View {
         }
     }
     
+    func playSound(URL: URL) {
+//            
+//        let audioPlayer = try AVAudioPlayer(contentsOf: URL)
+//        audioPlayer.numberOfLoops = 1
+//        audioPlayer.play()
+    }
+    
     func stopRecording() {
+//        AVAudioPlayer.play
+        
         audioRecorder?.stop()
         
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setActive(false)
         
         if let fileURL = recordingURL {
-                    do {
-                        if FileManager.default.fileExists(atPath: fileURL.path) {
-                            print("File exists, deleting...")
-                            try FileManager.default.removeItem(at: fileURL)
-                            print("Recording file deleted successfully")
-                        }
-                    } catch {
-                        print("Error deleting recording file: \(error.localizedDescription)")
-                    }
+            do {
+                if FileManager.default.fileExists(atPath: fileURL.path) {
+                    print("File exists, deleting...")
+                    try FileManager.default.removeItem(at: fileURL)
+                    print("Recording file deleted successfully")
                 }
+            } catch {
+                print("Error deleting recording file: \(error.localizedDescription)")
+            }
+        }
         
         recordingURL = nil
     }
