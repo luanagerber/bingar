@@ -1,25 +1,17 @@
-//
-//  AudioRecordManager.swift
-//  bingar
-//
-//  Created by Luana Gerber on 13/03/25.
-//
-
 import SwiftUI
-import AVFoundation
+import AVFAudio
 
 struct AudioRecordButton: View {
     @State private var isRecording = false
     @State private var audioRecorder: AVAudioRecorder?
     
+    @State private var recordingURL: URL?
+    
+    @State private var showPermissionAlert = false
+    
     var body: some View {
         Button(action: {
-            if isRecording {
-                stopRecording()
-            } else {
-                startRecording()
-            }
-            isRecording.toggle()
+            handleButtonTap()
         }) {
             Image(systemName: isRecording ? "stop.circle" : "mic.circle")
                 .resizable()
@@ -28,6 +20,16 @@ struct AudioRecordButton: View {
                 .fontWeight(.light)
                 .foregroundColor(isRecording ? .pink : .black.opacity(0.7))
         }
+    }
+    
+    private func handleButtonTap() {
+            if isRecording {
+                stopRecording()
+                isRecording = false
+            } else {
+                startRecording()
+                isRecording = true
+            }
     }
     
     func startRecording() {
@@ -57,7 +59,7 @@ struct AudioRecordButton: View {
     
     func stopRecording() {
         audioRecorder?.stop()
-        let audioSession = AVAudioSession.sharedInstance()
+        let audioSession = AVAudioApplication.sharedInstance()
         try? audioSession.setActive(false)
     }
 }

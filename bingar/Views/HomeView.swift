@@ -14,6 +14,7 @@ struct HomeView: View {
     var body: some View {
 
         ZStack {
+            Color.white.opacity(1.0).edgesIgnoringSafeArea(.all)
             Color.green.opacity(0.3).edgesIgnoringSafeArea(.all)
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
