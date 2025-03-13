@@ -28,7 +28,7 @@ struct BingoNumber: View {
         Text("\(number)")
             .font(.title)
             .fontWeight(.regular)
-            .foregroundStyle(isActive ? .red : .black)
+            .foregroundStyle(isActive ? .pink : .black)
             .multilineTextAlignment(.center)
     }
 }
