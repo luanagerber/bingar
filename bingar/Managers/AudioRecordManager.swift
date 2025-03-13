@@ -21,12 +21,12 @@ struct AudioRecordButton: View {
             }
             isRecording.toggle()
         }) {
-            Image(systemName: isRecording ? "stop.circle.fill" : "mic.circle.fill")
+            Image(systemName: isRecording ? "stop.circle" : "mic.circle")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 60, height: 60)
-                .foregroundColor(isRecording ? .red : .blue)
-                .padding()
+                .frame(width: 50, height: 50)
+                .fontWeight(.light)
+                .foregroundColor(isRecording ? .pink : .black.opacity(0.7))
         }
     }
     

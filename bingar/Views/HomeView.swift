@@ -14,19 +14,10 @@ struct HomeView: View {
     var body: some View {
 
         ZStack {
-            
             Color.green.opacity(0.3).edgesIgnoringSafeArea(.all)
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack {
-                Image(systemName: "camera")
-                    .imageScale(.large)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .padding(.bottom, 2)
-                Text("Digitalizar cartela")
-                    .bold()
-                
-                
                 Spacer()
                 
                 ZStack{
@@ -53,16 +44,24 @@ struct HomeView: View {
                                                 }
                                             }
                                         }
-                }.frame(width: 350, height: 370)
+                }.frame(width: 350, height: 380)
                 
                 Spacer()
                 
-                Image(systemName: "microphone")
-                    .imageScale(.large)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .padding(.bottom, 2)
-                Text("Gravar voz")
-                    .bold()
+                HStack(spacing: 50){
+                    Spacer()
+
+                    Image(systemName: "camera.circle")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .fontWeight(.light)
+                        .foregroundStyle(.black.opacity(0.7))
+                    
+                    
+                    AudioRecordButton()
+                    Spacer()
+
+                }.padding()
             }
             .padding()
             
