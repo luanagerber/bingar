@@ -59,7 +59,7 @@ struct HomeView: View {
                         .foregroundStyle(.black.opacity(0.7))
                     
                     
-                    AudioRecordButton()
+                    AudioRecordManager()
                     Spacer()
 
                 }.padding()

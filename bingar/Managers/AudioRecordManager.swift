@@ -1,7 +1,7 @@
 import SwiftUI
 import AVFAudio
 
-struct AudioRecordButton: View {
+struct AudioRecordManager: View {
     @State private var isRecording = false
     @State private var audioRecorder: AVAudioRecorder?
     
@@ -40,17 +40,23 @@ struct AudioRecordButton: View {
             try audioSession.setActive(true)
             
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let audioFilename = documentPath.appendingPathComponent("recording.m4a")
+            let audioFilename = documentPath.appendingPathComponent("temp_recording.wav")
+            recordingURL = audioFilename
             
-            let settings = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            let settings: [String: Any] = [
+                AVFormatIDKey: Int(kAudioFormatLinearPCM), // Use Linear PCM for WAV
+                AVSampleRateKey: 44100, // Standard CD-quality sample rate
+                AVNumberOfChannelsKey: 2, // Stereo recording
+                AVLinearPCMBitDepthKey: 16, // 16-bit depth for standard quality
+                AVLinearPCMIsBigEndianKey: false, // Little-endian format (default)
+                AVLinearPCMIsFloatKey: false // Standard integer samples
             ]
             
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder?.record()
+            
+            print("Started recording.")
+            print("Document path: \(documentPath)")
             
         } catch {
             print("Failed to start recording: \(error.localizedDescription)")
@@ -59,7 +65,22 @@ struct AudioRecordButton: View {
     
     func stopRecording() {
         audioRecorder?.stop()
-        let audioSession = AVAudioApplication.sharedInstance()
+        
+        let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setActive(false)
+        
+        if let fileURL = recordingURL {
+                    do {
+                        if FileManager.default.fileExists(atPath: fileURL.path) {
+                            print("File exists, deleting...")
+                            try FileManager.default.removeItem(at: fileURL)
+                            print("Recording file deleted successfully")
+                        }
+                    } catch {
+                        print("Error deleting recording file: \(error.localizedDescription)")
+                    }
+                }
+        
+        recordingURL = nil
     }
 }

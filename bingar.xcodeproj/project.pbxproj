@@ -415,7 +415,7 @@
 				INFOPLIST_FILE = bingar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = bIngAr;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio recording needed for realtime analysis.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "For real-time analysis, audio recording is required.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,7 +451,7 @@
 				INFOPLIST_FILE = bingar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = bIngAr;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio recording needed for realtime analysis.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "For real-time analysis, audio recording is required.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
