@@ -26,6 +26,8 @@ struct AudioRecordManager: View {
         if isRecording {
             stopRecording()
             isRecording = false
+            
+            playSound()
         } else {
             startRecording()
             isRecording = true
@@ -70,7 +72,7 @@ struct AudioRecordManager: View {
                // Create an AVAudioPlayer instance and play the sound
                let audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
                audioPlayer.numberOfLoops = 1
-               audioPlayer.volume = 1.0 // Volume should be between 0.0 and 1.0
+               audioPlayer.volume = 8.0 // Volume should be between 0.0 and 1.0
                audioPlayer.play()
            } catch {
                print("Error playing sound: \(error.localizedDescription)")
@@ -79,23 +81,22 @@ struct AudioRecordManager: View {
     
     func stopRecording() {
             audioRecorder?.stop()
-//            playSound()
             
             let audioSession = AVAudioSession.sharedInstance()
             try? audioSession.setActive(false)
             
-            if let fileURL = recordingURL {
-                do {
-                    if FileManager.default.fileExists(atPath: fileURL.path) {
-                        print("File exists, deleting...")
+//            if let fileURL = recordingURL {
+//                do {
+//                    if FileManager.default.fileExists(atPath: fileURL.path) {
+//                        print("File exists, deleting...")
 //                        try FileManager.default.removeItem(at: fileURL)
-                        print("Recording file deleted successfully")
-                    }
-                } catch {
-                    print("Error deleting recording file: \(error.localizedDescription)")
-                }
-            }
-            
-            recordingURL = nil
+//                        print("Recording file deleted successfully")
+//                    }
+//                } catch {
+//                    print("Error deleting recording file: \(error.localizedDescription)")
+//                }
+//            }
+//            
+//            recordingURL = nil
         }
 }
