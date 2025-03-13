@@ -25,50 +25,56 @@ struct ContentView: View {
                 
                 Spacer()
                 
+                ZStack{
+                    Rectangle()
+                        .fill(Color.white)
+                        .padding(16)
+                    
                 HStack(spacing: 24){
                     VStack(spacing: 12){
                         BingoTitle(text: "B")
-                        BingoNumber(number: 1)
-                        BingoNumber(number: 2)
-                        BingoNumber(number: 3)
-                        BingoNumber(number: 4)
-                        BingoNumber(number: 5)
+                        BingoNumber(number: 8)
+                        BingoNumber(number: 6)
+                        BingoNumber(number: 15)
+                        BingoNumber(number: 14)
+                        BingoNumber(number: 13)
                     }
                     
                     VStack(spacing: 12){
                         BingoTitle(text: "I")
-                        BingoNumber(number: 6)
-                        BingoNumber(number: 7)
-                        BingoNumber(number: 8)
-                        BingoNumber(number: 9)
-                        BingoNumber(number: 10)
+                        BingoNumber(number: 23)
+                        BingoNumber(number: 16)
+                        BingoNumber(number: 27)
+                        BingoNumber(number: 26)
+                        BingoNumber(number: 22)
                     }
                     
                     VStack(spacing: 12){
                         BingoTitle(text: "N")
-                        BingoNumber(number: 11)
-                        BingoNumber(number: 12)
-                        BingoNumber(number: 13)
-                        BingoNumber(number: 14)
-                        BingoNumber(number: 15)
+                        BingoNumber(number: 36)
+                        BingoNumber(number: 43)
+                        BingoNumber(number: 00)
+                        BingoNumber(number: 33)
+                        BingoNumber(number: 41)
                     }
                     VStack(spacing: 12){
                         BingoTitle(text: "G")
-                        BingoNumber(number: 16)
-                        BingoNumber(number: 17)
-                        BingoNumber(number: 18)
-                        BingoNumber(number: 19)
-                        BingoNumber(number: 20)
+                        BingoNumber(number: 53)
+                        BingoNumber(number: 51)
+                        BingoNumber(number: 58)
+                        BingoNumber(number: 57)
+                        BingoNumber(number: 60)
                     }
                     VStack(spacing: 12){
                         BingoTitle(text: "O")
-                        BingoNumber(number: 21)
-                        BingoNumber(number: 22)
-                        BingoNumber(number: 23)
-                        BingoNumber(number: 24)
-                        BingoNumber(number: 25)
+                        BingoNumber(number: 66)
+                        BingoNumber(number: 71)
+                        BingoNumber(number: 65)
+                        BingoNumber(number: 75)
+                        BingoNumber(number: 64)
                     }
                 }
+                }.frame(width: 350, height: 370)
                 
                 Spacer()
             }

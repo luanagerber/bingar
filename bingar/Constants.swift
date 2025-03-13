@@ -31,3 +31,15 @@ struct BingoNumber: View {
             .multilineTextAlignment(.center)
     }
 }
+
+struct BingoSymbol: View {
+    let symbol: String
+    
+    var body: some View {
+        Text(symbol)
+            .font(.title)
+            .fontWeight(.regular)
+            .foregroundStyle(.black)
+            .multilineTextAlignment(.center)
+    }
+}
