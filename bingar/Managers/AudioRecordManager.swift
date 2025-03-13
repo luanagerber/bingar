@@ -21,15 +21,13 @@ struct AudioRecordManager: View {
     }
     
     private func handleButtonTap() {
-        if isRecording {
-            stopRecording()
-            isRecording = false
-            
-            playSound()
-        } else {
-            startRecording()
-            isRecording = true
-        }
+            if isRecording {
+                stopRecording()
+                isRecording = false
+            } else {
+                startRecording()
+                isRecording = true
+            }
     }
     
     func startRecording() {
@@ -40,7 +38,7 @@ struct AudioRecordManager: View {
             try audioSession.setActive(true)
             
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let audioFilename = documentPath.appendingPathComponent("temp_recording2.wav")
+            let audioFilename = documentPath.appendingPathComponent("temp_recording.wav")
             recordingURL = audioFilename
             
             let settings: [String: Any] = [
@@ -62,20 +60,6 @@ struct AudioRecordManager: View {
             print("Failed to start recording: \(error.localizedDescription)")
         }
     }
-    
-    func playSound() {
-           guard let fileURL = recordingURL else { return }
-           
-           do {
-               // Create an AVAudioPlayer instance and play the sound
-               let audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
-               audioPlayer.numberOfLoops = 1
-               audioPlayer.volume = 8.0 // Volume should be between 0.0 and 1.0
-               audioPlayer.play()
-           } catch {
-               print("Error playing sound: \(error.localizedDescription)")
-           }
-       }
     
     func stopRecording() {
         audioRecorder?.stop()
