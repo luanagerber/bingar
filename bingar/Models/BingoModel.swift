@@ -47,6 +47,7 @@ struct BingoModel {
         
         if checkVictory() {
             triggerVictory()
+            emptySortedNumbers()
         }
         
     }
@@ -63,6 +64,10 @@ struct BingoModel {
     func triggerHapticFeedback() {
         let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
         impactGenerator.impactOccurred()
+    }
+    
+    mutating func emptySortedNumbers() {
+        sortedNumbers.removeAll()
     }
     
     
