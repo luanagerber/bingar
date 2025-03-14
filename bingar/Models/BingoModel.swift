@@ -22,10 +22,10 @@ struct BingoModel {
     
     // Sort functions
     mutating func sortNumber() {
-        let number = Int.random(in: 1...75)
+        var number = Int.random(in: 1...75)
         
         while sortedNumbers.contains(number) {
-            _ = Int.random(in: 1...75)
+            number = Int.random(in: 1...75)  // Update number here
         }
         
         sortedNumbers.insert(number)
