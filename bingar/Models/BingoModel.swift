@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-struct BingoModel {
+class BingoModel: ObservableObject {
     
-    var matrix: [[Int?]] = [
+    @Published var matrix: [[Int?]] = [
         //B,  I,  N,  G,   O
         [8,  23,  36, 53, 66],
         [6, 16, 43, 51, 71],
@@ -19,12 +19,12 @@ struct BingoModel {
         [13, 22, 41, 60, 64]
     ]
     
-    var sortedNumbers: Set<Int> = []
+    @Published var sortedNumbers: Set<Int> = []
     
-    var victoryMessage: String = ""
+    @Published var victoryMessage: String = ""
     
     // Sort functions
-    mutating func sortNumber() {
+    func sortNumber() {
         var number = Int.random(in: 1...75)
         
         while sortedNumbers.contains(number) {
@@ -41,21 +41,20 @@ struct BingoModel {
     
     
     // NewTurn functions
-    mutating func callNewTurn() {
+    func callNewTurn() {
         sortNumber()
         
         if checkVictory() {
             triggerVictory()
-            emptySortedNumbers()
+//            emptySortedNumbers()
         }
-        
     }
     
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
     }
     
-    mutating func triggerVictory(){
+    func triggerVictory(){
         victoryMessage = "BINGOOOU!"
         triggerHapticFeedback()
     }
@@ -65,10 +64,9 @@ struct BingoModel {
         impactGenerator.impactOccurred()
     }
     
-    mutating func emptySortedNumbers() {
+    func emptySortedNumbers() {
         sortedNumbers.removeAll()
     }
-    
     
     // Check Victory Functions
     func checkRow() -> Bool {

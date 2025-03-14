@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct HomeView: View {
     
-    @State private var bingoModel = BingoModel()
-        
+    @StateObject private var bingoModel = BingoModel()
+    @State private var showConfetti = false
+    
     var body: some View {
         
         ZStack {
@@ -67,6 +69,9 @@ struct HomeView: View {
                     
                     Button(action: {
                         bingoModel.callNewTurn()
+                        if bingoModel.checkVictory(){
+                            showConfetti = true
+                        }
                     }) {
                         Image(systemName: "laser.burst")
                             .resizable()
@@ -81,9 +86,11 @@ struct HomeView: View {
                     Spacer()
                     
                 }.padding()
+                
             }
             .padding()
             
+            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
         }
         
     }
