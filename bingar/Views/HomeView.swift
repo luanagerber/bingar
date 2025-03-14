@@ -51,7 +51,7 @@ struct HomeView: View {
                                 // Percorrendo os números da coluna
                                 ForEach(0..<5, id: \.self) { line in
                                     if let number = bingoModel.matrix[line][column] {
-                                        BingoNumber(number: number, isActive: bingoModel.wasSorted(number))
+                                        BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
                                     } else {
                                         BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
                                     }
@@ -73,7 +73,7 @@ struct HomeView: View {
                         .foregroundStyle(.black.opacity(0.7))
                     
                     Button(action: {
-                        if bingoModel.newTurn() {
+                        if bingoModel.callNewTurn() {
                             victoryMessage = "BINGOOOU!"
                         }
                     }) {

@@ -32,7 +32,7 @@ struct BingoModel {
         print(number)
     }
     
-    func wasSorted(_ number: Int) -> Bool {
+    func checkIfSorted(_ number: Int) -> Bool {
             sortedNumbers.contains(number)
         }
     
@@ -44,7 +44,7 @@ struct BingoModel {
     
     func checkRow() -> Bool {
         for row in matrix {
-            if row.allSatisfy({ $0 == nil || wasSorted($0!) }) {
+            if row.allSatisfy({ $0 == nil || checkIfSorted($0!) }) {
                 return true
             }
         }
@@ -55,7 +55,7 @@ struct BingoModel {
             for col in 0..<5 {
                 var complete = true
                 for row in 0..<5 {
-                    if let number = matrix[row][col], !wasSorted(number) {
+                    if let number = matrix[row][col], !checkIfSorted(number) {
                         complete = false
                         break
                     }
@@ -69,13 +69,13 @@ struct BingoModel {
         // Diagonal principal (canto superior esquerdo para inferior direito)
                 let mainDiagonal = (0..<5).allSatisfy { index in
                     guard let number = matrix[index][index] else { return true } // Espaço livre
-                    return wasSorted(number)
+                    return checkIfSorted(number)
                 }
                 
                 // Diagonal secundária (canto superior direito para inferior esquerdo)
                 let secondaryDiagonal = (0..<5).allSatisfy { index in
                     guard let number = matrix[index][4 - index] else { return true }
-                    return wasSorted(number)
+                    return checkIfSorted(number)
                 }
                 
                 return mainDiagonal || secondaryDiagonal
@@ -83,7 +83,7 @@ struct BingoModel {
     
     // Func newTurn
     
-    mutating func newTurn() -> Bool {
+    mutating func callNewTurn() -> Bool {
         sortNumber()
         
         let victory = checkVictory()
