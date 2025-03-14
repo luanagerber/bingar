@@ -8,7 +8,35 @@
 import UIKit
 import SwiftUI
 
-struct CameraView: UIViewControllerRepresentable {
+struct CameraView: View {
+    @Binding var isShown: Bool
+    @Binding var capturedImage: UIImage?
+    
+    var body: some View {
+        ZStack {
+            CameraController(isShown: $isShown, capturedImage: $capturedImage)
+            
+            VStack {
+                HStack {
+                    Button(action: {
+                        isShown = false // This will dismiss the camera view
+                    }) {
+                        Image(systemName: "arrow.backward.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+//                            .padding()
+                    }
+                    
+                    Spacer()
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+struct CameraController: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
@@ -61,3 +89,5 @@ struct CameraView: UIViewControllerRepresentable {
         }
     }
 }
+
+
