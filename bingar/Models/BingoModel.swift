@@ -19,16 +19,17 @@ struct BingoModel {
     ]
     
     var sortedNumbers: Set<Int> = []
-
+    
     // Sort functions
     mutating func sortNumber() {
         let number = Int.random(in: 1...75)
         
         while sortedNumbers.contains(number) {
-            let number = Int.random(in: 1...75)
+            _ = Int.random(in: 1...75)
         }
         
         sortedNumbers.insert(number)
+        print(number)
     }
     
     func wasSorted(_ number: Int) -> Bool {
@@ -78,6 +79,16 @@ struct BingoModel {
                 }
                 
                 return mainDiagonal || secondaryDiagonal
+    }
+    
+    // Func newTurn
+    
+    mutating func newTurn() -> Bool {
+        sortNumber()
+        
+        let victory = checkVictory()
+        
+        return victory
     }
     
 }

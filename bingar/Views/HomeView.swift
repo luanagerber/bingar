@@ -9,10 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let bingoModel = BingoModel()
+    @State private var bingoModel = BingoModel()
     
     @State private var victoryMessage: String? = nil
-    
+
     var body: some View {
         
         ZStack {
@@ -38,6 +38,7 @@ struct HomeView: View {
                     Rectangle()
                         .fill(Color.white)
                         .padding(16)
+                        .shadow(radius: 2)
                     
                     HStack(spacing: 24){
                         let titles = ["B", "I", "N", "G", "O"]
@@ -72,7 +73,7 @@ struct HomeView: View {
                         .foregroundStyle(.black.opacity(0.7))
                     
                     Button(action: {
-                        if bingoModel.checkVictory() {
+                        if bingoModel.newTurn() {
                             victoryMessage = "BINGOOOU!"
                         }
                     }) {
