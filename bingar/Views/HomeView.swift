@@ -12,7 +12,6 @@ struct HomeView: View {
     @State private var bingoModel = BingoModel()
     
     @State private var victoryMessage: String? = nil
-    @State private var shake = false
     
     var body: some View {
         
@@ -27,11 +26,6 @@ struct HomeView: View {
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
                     .padding(.top, 70)
-                    .offset(x: shake ? -10 : 10)
-                    .rotationEffect(.degrees(shake ? 5 : -5))
-                    .animation(.easeInOut(duration: 0.1).repeatCount(4, autoreverses: true), value: shake)
-                
-                
                 
                 Spacer()
             }
@@ -49,7 +43,6 @@ struct HomeView: View {
                     HStack(spacing: 24){
                         let titles = ["B", "I", "N", "G", "O"]
                         
-                        // Criando as colunas dinamicamente
                         ForEach(0..<5, id: \.self) { column in
                             VStack(spacing: 12) {
                                 BingoTitle(text: titles[column]) // Título da coluna
@@ -75,11 +68,7 @@ struct HomeView: View {
                     CameraManager()
                     
                     Button(action: {
-                        if bingoModel.callNewTurn() {
-                            victoryMessage = "BINGOOOU!"
-                            triggerHapticFeedback()
-                            shake.toggle()
-                        }
+                        callNewTurn()
                     }) {
                         Image(systemName: "laser.burst")
                             .resizable()
@@ -90,6 +79,7 @@ struct HomeView: View {
                     
                     
                     AudioRecordManager()
+                    
                     Spacer()
                     
                 }.padding()
@@ -98,6 +88,17 @@ struct HomeView: View {
             
         }
         
+    }
+    
+    func callNewTurn(){
+        if bingoModel.callNewTurn() {
+            triggerVictory()
+        }
+    }
+    
+    func triggerVictory(){
+        victoryMessage = "BINGOOOU!"
+        triggerHapticFeedback()
     }
     
     func triggerHapticFeedback() {
