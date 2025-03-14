@@ -66,11 +66,7 @@ struct HomeView: View {
                 HStack(spacing: 70){
                     Spacer()
                     
-                    Image(systemName: "camera.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .fontWeight(.light)
-                        .foregroundStyle(.black.opacity(0.7))
+                    CameraManager()
                     
                     Button(action: {
                         if bingoModel.callNewTurn() {
