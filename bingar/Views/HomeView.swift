@@ -36,10 +36,10 @@ struct HomeView: View {
 
                                                     // Percorrendo os números da coluna
                                                     ForEach(0..<5, id: \.self) { line in
-                                                        if let number = bingoModel.matrix[column][line] {
-                                                            BingoNumber(number: number, isActive: bingoModel.isActive(number))
+                                                        if let number = bingoModel.matrix[line][column] {
+                                                            BingoNumber(number: number, isActive: bingoModel.wasSorted(number))
                                                         } else {
-                                                            BingoSymbol(symbol: "star") // Espaço livre no centro
+                                                            BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
                                                         }
                                                     }
                                                 }
@@ -49,7 +49,7 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 50){
+                HStack(spacing: 70){
                     Spacer()
 
                     Image(systemName: "camera.circle")
