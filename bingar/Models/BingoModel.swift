@@ -10,6 +10,7 @@ import UIKit
 
 class BingoModel: ObservableObject {
     
+    //TipoBingo = struct
     @Published var matrix: [[Int?]] = [
         //B,  I,  N,  G,   O
         [8,  23,  36, 53, 66],
@@ -19,8 +20,9 @@ class BingoModel: ObservableObject {
         [13, 22, 41, 60, 64]
     ]
     
-    @Published var sortedNumbers: Set<Int> = []
+    //Array<TipoBingo>
     
+    @Published var sortedNumbers: Set<Int> = []
     @Published var victoryMessage: String = ""
     
     // Sort functions
