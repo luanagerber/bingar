@@ -71,6 +71,7 @@ struct HomeView: View {
                     Button(action: {
                         if bingoModel.callNewTurn() {
                             victoryMessage = "BINGOOOU!"
+                            triggerHapticFeedback()
                         }
                     }) {
                         Image(systemName: "laser.burst")
@@ -90,6 +91,11 @@ struct HomeView: View {
             
         }
         
+    }
+    
+    func triggerHapticFeedback() {
+        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        impactGenerator.impactOccurred()
     }
 }
 
