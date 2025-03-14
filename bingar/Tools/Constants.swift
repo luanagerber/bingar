@@ -40,6 +40,6 @@ struct BingoSymbol: View {
         Image(systemName: symbol)
             .imageScale(.large)
             .foregroundStyle(.black.opacity(0.7))
-        .padding(.vertical, 4)
+        .padding(.vertical, 2)
     }
 }

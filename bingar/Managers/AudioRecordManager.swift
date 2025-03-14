@@ -6,7 +6,9 @@ struct AudioRecordManager: View {
     @State private var audioRecorder: AVAudioRecorder?
     
     @State private var recordingURL: URL?
-        
+    
+    @State private var showPermissionAlert = false
+    
     var body: some View {
         Button(action: {
             handleButtonTap()
@@ -42,7 +44,7 @@ struct AudioRecordManager: View {
             recordingURL = audioFilename
             
             let settings: [String: Any] = [
-                AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                AVFormatIDKey: Int(kAudioFormatLinearPCM), // Use Linear PCM for WAV
                 AVSampleRateKey: 44100,
                 AVNumberOfChannelsKey: 2,
                 AVLinearPCMBitDepthKey: 16,
@@ -62,23 +64,23 @@ struct AudioRecordManager: View {
     }
     
     func stopRecording() {
-        audioRecorder?.stop()
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        try? audioSession.setActive(false)
-        
-        if let fileURL = recordingURL {
-                    do {
-                        if FileManager.default.fileExists(atPath: fileURL.path) {
-                            print("File exists, deleting...")
-                            try FileManager.default.removeItem(at: fileURL)
-                            print("Recording file deleted successfully")
-                        }
-                    } catch {
-                        print("Error deleting recording file: \(error.localizedDescription)")
-                    }
-                }
-        
-        recordingURL = nil
-    }
+            audioRecorder?.stop()
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setActive(false)
+            
+//            if let fileURL = recordingURL {
+//                do {
+//                    if FileManager.default.fileExists(atPath: fileURL.path) {
+//                        print("File exists, deleting...")
+//                        try FileManager.default.removeItem(at: fileURL)
+//                        print("Recording file deleted successfully")
+//                    }
+//                } catch {
+//                    print("Error deleting recording file: \(error.localizedDescription)")
+//                }
+//            }
+//            
+//            recordingURL = nil
+        }
 }
