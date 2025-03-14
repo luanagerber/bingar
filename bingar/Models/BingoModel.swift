@@ -18,12 +18,25 @@ struct BingoModel {
         [13, 22, 41, 60, 64]
     ]
     
-    var sortedNumbers: Set<Int> = [16, 33, 65, 99, 103] // Guarda os números sorteados
+    var sortedNumbers: Set<Int> = []
 
+    // Sort functions
+    mutating func sortNumber() {
+        let number = Int.random(in: 1...75)
+        
+        while sortedNumbers.contains(number) {
+            let number = Int.random(in: 1...75)
+        }
+        
+        sortedNumbers.insert(number)
+    }
+    
     func wasSorted(_ number: Int) -> Bool {
             sortedNumbers.contains(number)
         }
     
+    
+    // CheckVictory functions
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
     }
