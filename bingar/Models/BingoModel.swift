@@ -28,7 +28,7 @@ struct BingoModel {
         var number = Int.random(in: 1...75)
         
         while sortedNumbers.contains(number) {
-            number = Int.random(in: 1...75)  // Update number here
+            number = Int.random(in: 1...75)
         }
         
         sortedNumbers.insert(number)
@@ -41,7 +41,6 @@ struct BingoModel {
     
     
     // NewTurn functions
-    
     mutating func callNewTurn() {
         sortNumber()
         
