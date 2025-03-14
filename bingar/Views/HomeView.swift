@@ -12,7 +12,8 @@ struct HomeView: View {
     @State private var bingoModel = BingoModel()
     
     @State private var victoryMessage: String? = nil
-
+    @State private var shake = false
+    
     var body: some View {
         
         ZStack {
@@ -26,6 +27,11 @@ struct HomeView: View {
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
                     .padding(.top, 70)
+                    .offset(x: shake ? -10 : 10)
+                    .rotationEffect(.degrees(shake ? 5 : -5))
+                    .animation(.easeInOut(duration: 0.1).repeatCount(4, autoreverses: true), value: shake)
+                
+                
                 
                 Spacer()
             }
@@ -51,7 +57,7 @@ struct HomeView: View {
                                 // Percorrendo os números da coluna
                                 ForEach(0..<5, id: \.self) { line in
                                     if let number = bingoModel.matrix[line][column] {
-                                        BingoNumber(number: number, isActive: bingoModel.wasSorted(number))
+                                        BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
                                     } else {
                                         BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
                                     }
@@ -66,15 +72,13 @@ struct HomeView: View {
                 HStack(spacing: 70){
                     Spacer()
                     
-                    Image(systemName: "camera.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .fontWeight(.light)
-                        .foregroundStyle(.black.opacity(0.7))
+                    CameraManager()
                     
                     Button(action: {
-                        if bingoModel.newTurn() {
+                        if bingoModel.callNewTurn() {
                             victoryMessage = "BINGOOOU!"
+                            triggerHapticFeedback()
+                            shake.toggle()
                         }
                     }) {
                         Image(systemName: "laser.burst")
@@ -94,6 +98,11 @@ struct HomeView: View {
             
         }
         
+    }
+    
+    func triggerHapticFeedback() {
+        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        impactGenerator.impactOccurred()
     }
 }
 

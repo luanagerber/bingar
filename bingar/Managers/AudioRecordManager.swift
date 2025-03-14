@@ -6,9 +6,7 @@ struct AudioRecordManager: View {
     @State private var audioRecorder: AVAudioRecorder?
     
     @State private var recordingURL: URL?
-    
-    @State private var showPermissionAlert = false
-    
+        
     var body: some View {
         Button(action: {
             handleButtonTap()
@@ -69,18 +67,18 @@ struct AudioRecordManager: View {
             let audioSession = AVAudioSession.sharedInstance()
             try? audioSession.setActive(false)
             
-//            if let fileURL = recordingURL {
-//                do {
-//                    if FileManager.default.fileExists(atPath: fileURL.path) {
-//                        print("File exists, deleting...")
-//                        try FileManager.default.removeItem(at: fileURL)
-//                        print("Recording file deleted successfully")
-//                    }
-//                } catch {
-//                    print("Error deleting recording file: \(error.localizedDescription)")
-//                }
-//            }
-//            
-//            recordingURL = nil
+            if let fileURL = recordingURL {
+                do {
+                    if FileManager.default.fileExists(atPath: fileURL.path) {
+                        print("File exists, deleting...")
+                        try FileManager.default.removeItem(at: fileURL)
+                        print("Recording file deleted successfully")
+                    }
+                } catch {
+                    print("Error deleting recording file: \(error.localizedDescription)")
+                }
+            }
+            
+            recordingURL = nil
         }
 }
