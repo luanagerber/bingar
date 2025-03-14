@@ -10,9 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var bingoModel = BingoModel()
-    
-    @State private var victoryMessage: String? = nil
-    
+        
     var body: some View {
         
         ZStack {
@@ -21,7 +19,7 @@ struct HomeView: View {
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack{
-                Text(victoryMessage ?? "")
+                Text(bingoModel.victoryMessage)
                     .font(.largeTitle)
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
@@ -68,7 +66,7 @@ struct HomeView: View {
                     CameraManager()
                     
                     Button(action: {
-                        callNewTurn()
+                        bingoModel.callNewTurn()
                     }) {
                         Image(systemName: "laser.burst")
                             .resizable()
@@ -90,21 +88,6 @@ struct HomeView: View {
         
     }
     
-    func callNewTurn(){
-        if bingoModel.callNewTurn() {
-            triggerVictory()
-        }
-    }
-    
-    func triggerVictory(){
-        victoryMessage = "BINGOOOU!"
-        triggerHapticFeedback()
-    }
-    
-    func triggerHapticFeedback() {
-        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        impactGenerator.impactOccurred()
-    }
 }
 
 #Preview {

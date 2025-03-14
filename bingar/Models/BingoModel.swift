@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct BingoModel {
     
@@ -19,6 +20,8 @@ struct BingoModel {
     ]
     
     var sortedNumbers: Set<Int> = []
+    
+    var victoryMessage: String = ""
     
     // Sort functions
     mutating func sortNumber() {
@@ -37,11 +40,33 @@ struct BingoModel {
         }
     
     
-    // CheckVictory functions
+    // NewTurn functions
+    
+    mutating func callNewTurn() {
+        sortNumber()
+        
+        if checkVictory() {
+            triggerVictory()
+        }
+        
+    }
+    
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
     }
     
+    mutating func triggerVictory(){
+        victoryMessage = "BINGOOOU!"
+        triggerHapticFeedback()
+    }
+    
+    func triggerHapticFeedback() {
+        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        impactGenerator.impactOccurred()
+    }
+    
+    
+    // Check Victory Functions
     func checkRow() -> Bool {
         for row in matrix {
             if row.allSatisfy({ $0 == nil || checkIfSorted($0!) }) {
@@ -79,16 +104,6 @@ struct BingoModel {
                 }
                 
                 return mainDiagonal || secondaryDiagonal
-    }
-    
-    // Func newTurn
-    
-    mutating func callNewTurn() -> Bool {
-        sortNumber()
-        
-        let victory = checkVictory()
-        
-        return victory
     }
     
 }
