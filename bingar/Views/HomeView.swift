@@ -49,7 +49,7 @@ struct HomeView: View {
                                 
                                 // Percorrendo os números da coluna
                                 ForEach(0..<5, id: \.self) { line in
-                                    if let number = bingoModel.matrix[line][column] {
+                                    if let number = bingoModel.bingo.matrix[line][column] {
                                         BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
                                     } else {
                                         BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro

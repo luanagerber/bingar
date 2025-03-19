@@ -11,14 +11,14 @@ import UIKit
 class BingoModel: ObservableObject {
     
     //TipoBingo = struct
-    @Published var matrix: [[Int?]] = [
+    @Published var bingo = BingoCard(matrix: [
         //B,  I,  N,  G,   O
         [8,  23,  36, 53, 66],
         [6, 16, 43, 51, 71],
         [15, 27, nil, 58, 65],
         [14, 26, 33, 57, 75],
         [13, 22, 41, 60, 64]
-    ]
+    ])
     
     //Array<TipoBingo>
     
@@ -48,9 +48,22 @@ class BingoModel: ObservableObject {
         
         if checkVictory() {
             triggerVictory()
-//            emptySortedNumbers()
         }
     }
+    
+    
+    func resetBingo() {
+        bingo = BingoCard(matrix: [
+            [8, 23, 36, 53, 66],
+            [6, 16, 43, 51, 71],
+            [15, 27, nil, 58, 65],
+            [14, 26, 33, 57, 75],
+            [13, 22, 41, 60, 64]
+        ])
+        
+        emptySortedNumbers()
+    }
+    
     
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
@@ -72,7 +85,7 @@ class BingoModel: ObservableObject {
     
     // Check Victory Functions
     func checkRow() -> Bool {
-        for row in matrix {
+        for row in bingo.matrix {
             if row.allSatisfy({ $0 == nil || checkIfSorted($0!) }) {
                 return true
             }
@@ -84,7 +97,7 @@ class BingoModel: ObservableObject {
             for col in 0..<5 {
                 var complete = true
                 for row in 0..<5 {
-                    if let number = matrix[row][col], !checkIfSorted(number) {
+                    if let number = bingo.matrix[row][col], !checkIfSorted(number) {
                         complete = false
                         break
                     }
@@ -97,13 +110,13 @@ class BingoModel: ObservableObject {
     func checkDiagonal() -> Bool {
         // Diagonal principal (canto superior esquerdo para inferior direito)
                 let mainDiagonal = (0..<5).allSatisfy { index in
-                    guard let number = matrix[index][index] else { return true } // Espaço livre
+                    guard let number = bingo.matrix[index][index] else { return true } // Espaço livre
                     return checkIfSorted(number)
                 }
                 
                 // Diagonal secundária (canto superior direito para inferior esquerdo)
                 let secondaryDiagonal = (0..<5).allSatisfy { index in
-                    guard let number = matrix[index][4 - index] else { return true }
+                    guard let number = bingo.matrix[index][4 - index] else { return true }
                     return checkIfSorted(number)
                 }
                 
