@@ -78,7 +78,10 @@ extension CameraManager {
         // Add CoreML code to process the image
         let model = try? BingoCardsDetector(configuration: .init())
         
-        let prediction = try? model?.prediction(image: convertedImage)
+        //iouThreshold: controls how much overlap is allowed between detected objects.
+        //confidenceThreshold: sets a minimum confidence level for a detected object to be considered valid.
+        let prediction = try? model?.prediction(image: convertedImage, iouThreshold: 0.5, confidenceThreshold: 0.8)
+        
         let result = prediction?.classLabel ?? "No prediction"
         let isBingoCard = result == "bingoCard"
         
