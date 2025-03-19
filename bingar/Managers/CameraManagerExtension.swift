@@ -5,9 +5,11 @@
 //  Created by Luana Gerber on 19/03/25.
 //
 
-import SwiftUI
-import AVFoundation
+import CoreML
 import CoreVideo
+
+import AVFoundation
+
 import UIKit
 
 // Extension to help with CoreML processing
@@ -82,10 +84,20 @@ extension CameraManager {
         //confidenceThreshold: sets a minimum confidence level for a detected object to be considered valid.
         let prediction = try? model?.prediction(image: convertedImage, iouThreshold: 0.5, confidenceThreshold: 0.8)
         
-        let result = prediction?.classLabel ?? "No prediction"
-        let isBingoCard = result == "bingoCard"
-        
-        print(isBingoCard)
+        if let confidenceArray = prediction?.confidence as? MLMultiArray {
+            // Extract the confidence score (assuming a single class output)
+            let confidenceScore = confidenceArray[0].doubleValue
+            
+            // Define confidence threshold (default: 0.4)
+            let confidenceThreshold = 0.8
+            
+            // Check if the confidence is high enough to classify as a bingo card
+            let isBingoCard = confidenceScore >= confidenceThreshold
+            
+            print("Confidence Score: \(confidenceScore), isBingoCard: \(isBingoCard)")
+        } else {
+            print("Invalid confidence data")
+        }
         
     }
     
