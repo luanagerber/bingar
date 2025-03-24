@@ -59,7 +59,7 @@ struct HomeView: View {
                         }
                     }
                 }.frame(width: 350, height: 380)
-                
+
                 Spacer()
                 
                 HStack(spacing: 70){

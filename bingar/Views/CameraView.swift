@@ -82,6 +82,7 @@ struct CameraController: UIViewControllerRepresentable {
                 do {
                     try jpegData.write(to: imageFilename)
                     print("Image saved to: \(imageFilename.path)")
+                    detectBingoNumbers(in: image)
                 } catch {
                     print("Error saving image: \(error.localizedDescription)")
                 }

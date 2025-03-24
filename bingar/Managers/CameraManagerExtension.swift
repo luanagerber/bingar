@@ -70,36 +70,44 @@ extension CameraManager {
         return buffer
     }
     
-    
-    func processImageWithCoreML() {
-        guard let convertedImage = convertSavedImage() else {
-            print("Failed to process image")
+    func processImageToNumbers() {
+        guard let loadedImage = loadSavedImage() else {
+            print("Failed to load image")
             return
         }
         
-        // Add CoreML code to process the image
-        let model = try? BingoCardsDetector(configuration: .init())
-        
-        //iouThreshold: controls how much overlap is allowed between detected objects.
-        //confidenceThreshold: sets a minimum confidence level for a detected object to be considered valid.
-        let prediction = try? model?.prediction(image: convertedImage, iouThreshold: 0.5, confidenceThreshold: 0.8)
-        
-        if let confidenceArray = prediction?.confidence as? MLMultiArray {
-            // Extract the confidence score (assuming a single class output)
-            let confidenceScore = confidenceArray[0].doubleValue
-            
-            // Define confidence threshold (default: 0.4)
-            let confidenceThreshold = 0.8
-            
-            // Check if the confidence is high enough to classify as a bingo card
-            let isBingoCard = confidenceScore >= confidenceThreshold
-            
-            print("Confidence Score: \(confidenceScore), isBingoCard: \(isBingoCard)")
-        } else {
-            print("Invalid confidence data")
-        }
-        
+        detectBingoNumbers(in: loadedImage)
     }
+    
+//    func processImageWithCoreML() {
+//        guard let convertedImage = convertSavedImage() else {
+//            print("Failed to process image")
+//            return
+//        }
+//        
+//        // Add CoreML code to process the image
+//        let model = try? BingoCardsDetector(configuration: .init())
+//        
+//        //iouThreshold: controls how much overlap is allowed between detected objects.
+//        //confidenceThreshold: sets a minimum confidence level for a detected object to be considered valid.
+//        let prediction = try? model?.prediction(image: convertedImage, iouThreshold: 0.5, confidenceThreshold: 0.8)
+//        
+//        if let confidenceArray = prediction?.confidence as? MLMultiArray {
+//            // Extract the confidence score (assuming a single class output)
+//            let confidenceScore = confidenceArray[0].doubleValue
+//            
+//            // Define confidence threshold (default: 0.4)
+//            let confidenceThreshold = 0.8
+//            
+//            // Check if the confidence is high enough to classify as a bingo card
+//            let isBingoCard = confidenceScore >= confidenceThreshold
+//            
+//            print("Confidence Score: \(confidenceScore), isBingoCard: \(isBingoCard)")
+//        } else {
+//            print("Invalid confidence data")
+//        }
+//        
+//    }
     
     func deleteImage() {
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
