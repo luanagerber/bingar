@@ -9,21 +9,17 @@ import Foundation
 import UIKit
 
 class BingoModel: ObservableObject {
-    
-    //TipoBingo = struct
-    @Published var bingo = BingoCard(matrix: [
-        //B,  I,  N,  G,   O
-        [8,  23,  36, 53, 66],
-        [6, 16, 43, 51, 71],
-        [15, 27, nil, 58, 65],
-        [14, 26, 33, 57, 75],
-        [13, 22, 41, 60, 64]
-    ])
-    
-    //Array<TipoBingo>
+    @Published var bingoNumbers: BingoNumbers
+    @Published var bingoCard: BingoCard
     
     @Published var sortedNumbers: Set<Int> = []
     @Published var victoryMessage: String = ""
+    
+    init() {
+        let initialNumbers = BingoNumbers()
+        self.bingoNumbers = initialNumbers
+        self.bingoCard = BingoCard(from: initialNumbers)
+    }
     
     // Sort functions
     func sortNumber() {
@@ -38,9 +34,8 @@ class BingoModel: ObservableObject {
     }
     
     func checkIfSorted(_ number: Int) -> Bool {
-            sortedNumbers.contains(number)
-        }
-    
+        sortedNumbers.contains(number)
+    }
     
     // NewTurn functions
     func callNewTurn() {
@@ -51,25 +46,11 @@ class BingoModel: ObservableObject {
         }
     }
     
-    
-    func resetBingo() {
-        bingo = BingoCard(matrix: [
-            [8, 23, 36, 53, 66],
-            [6, 16, 43, 51, 71],
-            [15, 27, nil, 58, 65],
-            [14, 26, 33, 57, 75],
-            [13, 22, 41, 60, 64]
-        ])
-        
-        emptySortedNumbers()
-    }
-    
-    
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
     }
     
-    func triggerVictory(){
+    func triggerVictory() {
         victoryMessage = "BINGOOOU!"
         triggerHapticFeedback()
     }
@@ -79,13 +60,9 @@ class BingoModel: ObservableObject {
         impactGenerator.impactOccurred()
     }
     
-    func emptySortedNumbers() {
-        sortedNumbers.removeAll()
-    }
-    
     // Check Victory Functions
     func checkRow() -> Bool {
-        for row in bingo.matrix {
+        for row in bingoCard.matrix {
             if row.allSatisfy({ $0 == nil || checkIfSorted($0!) }) {
                 return true
             }
@@ -94,33 +71,44 @@ class BingoModel: ObservableObject {
     }
     
     func checkColumn() -> Bool {
-            for col in 0..<5 {
-                var complete = true
-                for row in 0..<5 {
-                    if let number = bingo.matrix[row][col], !checkIfSorted(number) {
-                        complete = false
-                        break
-                    }
+        for col in 0..<5 {
+            var complete = true
+            for row in 0..<5 {
+                if let number = bingoCard.matrix[row][col], !checkIfSorted(number) {
+                    complete = false
+                    break
                 }
-                if complete { return true }
             }
-            return false
+            if complete { return true }
         }
-    
-    func checkDiagonal() -> Bool {
-        // Diagonal principal (canto superior esquerdo para inferior direito)
-                let mainDiagonal = (0..<5).allSatisfy { index in
-                    guard let number = bingo.matrix[index][index] else { return true } // Espaço livre
-                    return checkIfSorted(number)
-                }
-                
-                // Diagonal secundária (canto superior direito para inferior esquerdo)
-                let secondaryDiagonal = (0..<5).allSatisfy { index in
-                    guard let number = bingo.matrix[index][4 - index] else { return true }
-                    return checkIfSorted(number)
-                }
-                
-                return mainDiagonal || secondaryDiagonal
+        return false
     }
     
+    func checkDiagonal() -> Bool {
+        let mainDiagonal = (0..<5).allSatisfy { index in
+            guard let number = bingoCard.matrix[index][index] else { return true } // Espaço livre
+            return checkIfSorted(number)
+        }
+        
+        let secondaryDiagonal = (0..<5).allSatisfy { index in
+            guard let number = bingoCard.matrix[index][4 - index] else { return true }
+            return checkIfSorted(number)
+        }
+        
+        return mainDiagonal || secondaryDiagonal
+    }
+    
+    func emptySortedNumbers() {
+        sortedNumbers.removeAll()
+    }
+    
+    func updateNumbers(newNumbers: [[Int?]]) {
+        guard newNumbers.count == 5, newNumbers.allSatisfy({ $0.count == 5 }) else {
+            print("Erro: A matriz deve ser 5x5")
+            return
+        }
+        
+        bingoNumbers.numbers = newNumbers
+        bingoCard = BingoCard(from: bingoNumbers)
+    }
 }

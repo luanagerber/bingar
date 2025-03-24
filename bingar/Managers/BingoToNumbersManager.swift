@@ -27,7 +27,7 @@ func detectBingoNumbers(in image: UIImage) {
                     cgImage.width,
                     cgImage.height
                 )
-
+                
                 // Only include text that looks like numbers
                 if let number = Int(topCandidate.string) {
                     bingoNumbers.append((String(number), rect))
@@ -49,6 +49,7 @@ func detectBingoNumbers(in image: UIImage) {
     let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
     try? handler.perform([textRequest])
 }
+
 
 func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)]) {
     // 1. First, sort by Y position (top to bottom)
@@ -105,7 +106,7 @@ func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)]) {
         bingoGrid[2][2] = nil
     }
     
-//        print(bingoGrid)
+    //        print(bingoGrid)
     
     // Print grid without Optional wrappers
     for row in bingoGrid {
@@ -124,3 +125,4 @@ func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)]) {
         print("]")
     }
 }
+
