@@ -12,7 +12,7 @@ struct InitialView: View {
     
     @StateObject private var bingoViewModel = BingoGridViewModel()
     
-//    @State private var showConfetti = false
+    @State private var showConfetti = false
     
     var body: some View {
         
@@ -47,7 +47,7 @@ struct InitialView: View {
                     Button(action: {
                         bingoViewModel.callNewTurn()
                         if bingoViewModel.checkVictory(){
-//                            showConfetti = true
+                            showConfetti = true
                         }
                     }) {
                         Image(systemName: "laser.burst")
