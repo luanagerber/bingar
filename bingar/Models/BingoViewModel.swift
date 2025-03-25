@@ -10,7 +10,7 @@ import SwiftUI
 import Vision
 import UIKit
 
-class BingoModel: ObservableObject {
+class BingoViewModel: ObservableObject {
     @Published var bingoNumbers: BingoNumbers
     @Published var bingoCard: BingoCard
     

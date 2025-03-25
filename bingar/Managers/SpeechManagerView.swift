@@ -11,14 +11,12 @@ import AVFoundation
 import Foundation
 import Speech
 
-struct SpeechManager: View {
-    
+struct SpeechManagerView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
-    
     @State private var isRecording = false
     @State var transcrip: String = ""
     
-    var bingoModel: BingoModel
+    var bingoModel: BingoViewModel
     
     var body: some View {
         Button(action: {
@@ -34,16 +32,16 @@ struct SpeechManager: View {
     }
     
     func handleButtonTap() {
-        if isRecording {
-            speechRecognizer.stopTranscribing()
-            isRecording = false
-            transcrip = speechRecognizer.transcript
-            print(transcrip)
-        } else {
-            speechRecognizer.resetTranscript()
-            speechRecognizer.startTranscribing()
-            isRecording = true
-        }
+//        if isRecording {
+//            speechRecognizer.stopTranscribing()
+//            isRecording = false
+//            transcrip = speechRecognizer.transcript
+//            print(transcrip)
+//        } else {
+//            speechRecognizer.resetTranscript()
+//            speechRecognizer.startTranscribing()
+//            isRecording = true
+//        }
     }
     
 }

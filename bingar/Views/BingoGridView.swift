@@ -10,13 +10,15 @@ import SwiftUI
 
 struct BingoGridView: View {
     
-    var bingoModel: BingoModel
+    @ObservedObject var bingoModel: BingoViewModel
 
     let elementWidht: CGFloat = 47
     let elementHeight: CGFloat = 41
     
     var body: some View {
+        
         ZStack{
+            
             Rectangle()
                 .fill(Color.white)
                 .padding(16)
@@ -56,7 +58,7 @@ struct BingoGridView: View {
             }
             
         }.frame(width: 350, height: 380)
+        
+        
     }
-
-    
 }

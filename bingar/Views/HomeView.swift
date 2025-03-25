@@ -10,9 +10,13 @@ import ConfettiSwiftUI
 
 struct HomeView: View {
     
-    @StateObject private var bingoModel = BingoModel()
+    @StateObject private var bingoModel = BingoViewModel()
+
     
 //    @State private var showConfetti = false
+    
+    let elementWidht: CGFloat = 47
+    let elementHeight: CGFloat = 41
     
     var body: some View {
         
@@ -34,9 +38,50 @@ struct HomeView: View {
             VStack {
                 
                 Spacer()
-                    
-                    BingoGridView(bingoModel: bingoModel)
-                    
+                
+                BingoGridView(bingoModel: bingoModel)
+                
+                /// BINGO GRID
+//                ZStack{
+//                    Rectangle()
+//                        .fill(Color.white)
+//                        .padding(16)
+//                        .shadow(radius: 2)
+//                    
+//                    VStack(spacing: 6.5) {
+//                        
+//                        HStack(spacing: 12){
+//                            BingoTitle(text: "B")
+//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                            BingoTitle(text: "I")
+//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                            BingoTitle(text: "N")
+//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                            BingoTitle(text: "G")
+//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                            BingoTitle(text: "O")
+//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                        }.padding(.top, 2)
+//                        
+//                        ForEach(0..<5, id: \.self) { column in
+//                            HStack(spacing: 12) {
+//                                
+//                                ForEach(0..<5, id: \.self) { line in
+//                                    if let number = bingoModel.bingoCard.matrix[line][column] {
+//                                        BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
+//                                            .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                                    } else {
+//                                        BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
+//                                            .frame(width: elementWidht, height: elementHeight, alignment: .center)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                    
+//                }.frame(width: 350, height: 380)
+                /// FIM DA BINGOGRID
+                
                 Spacer()
                 
                 HStack(spacing: 70){
@@ -58,7 +103,7 @@ struct HomeView: View {
                     }
                     
                     
-                    SpeechManager(bingoModel: bingoModel)
+                    SpeechManagerView(bingoModel: bingoModel)
                     
                     Spacer()
                     

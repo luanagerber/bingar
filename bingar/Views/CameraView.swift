@@ -12,7 +12,7 @@ struct CameraView: View {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
-    var bingoModel: BingoModel
+    var bingoModel: BingoViewModel
     
     var body: some View {
         ZStack {
@@ -25,7 +25,7 @@ struct CameraController: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
-    var bingoModel: BingoModel
+    var bingoModel: BingoViewModel
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let controller = UIImagePickerController()
@@ -44,9 +44,9 @@ struct CameraController: UIViewControllerRepresentable {
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         @Binding var isShown: Bool
         @Binding var capturedImage: UIImage?
-        var bingoModel: BingoModel
+        var bingoModel: BingoViewModel
         
-        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoModel) {
+        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoViewModel) {
             _isShown = isShown
             _capturedImage = capturedImage
             self.bingoModel = bingoModel

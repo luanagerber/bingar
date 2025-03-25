@@ -12,7 +12,7 @@ struct CameraManager: View {
     @State private var isShowingCamera = false
     @State private var capturedImage: UIImage?
     
-    var bingoModel: BingoModel
+    var bingoModel: BingoViewModel
     
     var body: some View {
         Button(action: {
