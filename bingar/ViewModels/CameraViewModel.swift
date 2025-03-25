@@ -1,6 +1,6 @@
 //
 //  CameraViewModel.swift
-//  Bingar
+//  BingoDetectorTest
 //
 //  Created by Jaide Zardin on 19/03/25.
 //
