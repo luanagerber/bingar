@@ -34,8 +34,6 @@ class BingoModel: ObservableObject {
             self.emptySortedNumbers()
             self.bingoNumbers.numbers = newNumbers
             self.bingoCard = BingoCard(from: self.bingoNumbers)
-            print("bingo numbers updated: \(self.bingoNumbers.numbers)")
-            print("bingo card updated: \(self.bingoCard)")
         }
     }
     

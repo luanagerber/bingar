@@ -104,7 +104,6 @@ func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoMo
     }
     
     DispatchQueue.main.async {
-        print(bingoGrid)
         bingoModel.updateNumbers(newNumbers: bingoGrid)
     }
 }
