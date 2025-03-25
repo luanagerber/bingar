@@ -8,7 +8,7 @@
 import SwiftUI
 import ConfettiSwiftUI
 
-struct HomeView: View {
+struct InitialView: View {
     
     @StateObject private var bingoViewModel = BingoGridViewModel()
     
@@ -71,5 +71,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    InitialView()
 }
