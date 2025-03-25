@@ -11,10 +11,8 @@ import ConfettiSwiftUI
 struct HomeView: View {
     
     @StateObject private var bingoModel = BingoModel()
-    @State private var showConfetti = false
     
-    let widht: CGFloat = 47
-    let height: CGFloat = 41
+//    @State private var showConfetti = false
     
     var body: some View {
         
@@ -36,49 +34,9 @@ struct HomeView: View {
             VStack {
                 
                 Spacer()
-                
-                ZStack{
-                    Rectangle()
-                        .fill(Color.white)
-                        .padding(16)
-                        .shadow(radius: 2)
                     
-                    VStack(spacing: 6.5) {
-//                        let titles = ["B", "I", "N", "G", "O"]
-                        
-                        HStack(spacing: 12){
-                            BingoTitle(text: "B")
-                                .frame(width: widht, height: height, alignment: .center)
-                            BingoTitle(text: "I")
-                                .frame(width: widht, height: height, alignment: .center)
-                            BingoTitle(text: "N")
-                                .frame(width: widht, height: height, alignment: .center)
-                            BingoTitle(text: "G")
-                                .frame(width: widht, height: height, alignment: .center)
-                            BingoTitle(text: "O")
-                                .frame(width: widht, height: height, alignment: .center)
-                        }.padding(.top, 2)
-                        
-                        ForEach(0..<5, id: \.self) { column in
-                            HStack(spacing: 12) {
-//                                BingoTitle(text: titles[column]) // Título da coluna
-                                
-                                // Percorrendo os números da coluna (invertendo linha e coluna)
-                                ForEach(0..<5, id: \.self) { line in
-                                    if let number = bingoModel.bingoCard.matrix[line][column] {
-                                        BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
-                                            .frame(width: widht, height: height, alignment: .center)
-                                    } else {
-                                        BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
-                                            .frame(width: widht, height: height, alignment: .center)
-                                    }
-                                     
-                                }
-                            }
-                        }
-                    }
-                }.frame(width: 350, height: 380)
-
+                    BingoGridView(bingoModel: bingoModel)
+                    
                 Spacer()
                 
                 HStack(spacing: 70){
@@ -89,7 +47,7 @@ struct HomeView: View {
                     Button(action: {
                         bingoModel.callNewTurn()
                         if bingoModel.checkVictory(){
-                            showConfetti = true
+//                            showConfetti = true
                         }
                     }) {
                         Image(systemName: "laser.burst")
@@ -100,7 +58,7 @@ struct HomeView: View {
                     }
                     
                     
-                    AudioRecordManager()
+                    SpeechManager(bingoModel: bingoModel)
                     
                     Spacer()
                     
@@ -108,9 +66,7 @@ struct HomeView: View {
                 
             }
             .padding()
-//            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
-            
-//            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
+
         }
         
     }
