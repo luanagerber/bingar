@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct HomeView: View {
     
-    @State private var bingoModel = BingoModel()
-    
-    @State private var victoryMessage: String? = nil
-    @State private var shake = false
+    @StateObject private var bingoModel = BingoModel()
+    @State private var showConfetti = false
     
     var body: some View {
         
@@ -22,16 +21,11 @@ struct HomeView: View {
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack{
-                Text(victoryMessage ?? "")
+                Text(bingoModel.victoryMessage)
                     .font(.largeTitle)
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
                     .padding(.top, 70)
-                    .offset(x: shake ? -10 : 10)
-                    .rotationEffect(.degrees(shake ? 5 : -5))
-                    .animation(.easeInOut(duration: 0.1).repeatCount(4, autoreverses: true), value: shake)
-                
-                
                 
                 Spacer()
             }
@@ -49,14 +43,13 @@ struct HomeView: View {
                     HStack(spacing: 24){
                         let titles = ["B", "I", "N", "G", "O"]
                         
-                        // Criando as colunas dinamicamente
                         ForEach(0..<5, id: \.self) { column in
                             VStack(spacing: 12) {
                                 BingoTitle(text: titles[column]) // Título da coluna
                                 
                                 // Percorrendo os números da coluna
                                 ForEach(0..<5, id: \.self) { line in
-                                    if let number = bingoModel.matrix[line][column] {
+                                    if let number = bingoModel.bingoCard.matrix[line][column] {
                                         BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
                                     } else {
                                         BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
@@ -66,19 +59,18 @@ struct HomeView: View {
                         }
                     }
                 }.frame(width: 350, height: 380)
-                
+
                 Spacer()
                 
                 HStack(spacing: 70){
                     Spacer()
                     
-                    CameraManager()
+                    CameraManager(bingoModel: bingoModel)
                     
                     Button(action: {
-                        if bingoModel.callNewTurn() {
-                            victoryMessage = "BINGOOOU!"
-                            triggerHapticFeedback()
-                            shake.toggle()
+                        bingoModel.callNewTurn()
+                        if bingoModel.checkVictory(){
+                            showConfetti = true
                         }
                     }) {
                         Image(systemName: "laser.burst")
@@ -90,20 +82,19 @@ struct HomeView: View {
                     
                     
                     AudioRecordManager()
+                    
                     Spacer()
                     
                 }.padding()
+                
             }
             .padding()
             
+            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
         }
         
     }
     
-    func triggerHapticFeedback() {
-        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        impactGenerator.impactOccurred()
-    }
 }
 
 #Preview {

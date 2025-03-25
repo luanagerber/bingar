@@ -8,9 +8,24 @@
 import UIKit
 import SwiftUI
 
-struct CameraView: UIViewControllerRepresentable {
+struct CameraView: View {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
+    
+    var bingoModel: BingoModel
+    
+    var body: some View {
+        ZStack {
+            CameraController(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
+        }
+    }
+}
+
+struct CameraController: UIViewControllerRepresentable {
+    @Binding var isShown: Bool
+    @Binding var capturedImage: UIImage?
+    
+    var bingoModel: BingoModel
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let controller = UIImagePickerController()
@@ -22,22 +37,29 @@ struct CameraView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(isShown: $isShown, capturedImage: $capturedImage)
+        Coordinator(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
     }
+    
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         @Binding var isShown: Bool
         @Binding var capturedImage: UIImage?
+        var bingoModel: BingoModel
         
-        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>) {
+        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoModel) {
             _isShown = isShown
             _capturedImage = capturedImage
+            self.bingoModel = bingoModel
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
                 capturedImage = image
-                saveImageToDocumentsDirectory(image)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    
+                    processImageToNumbers(in: image, bingoModel: self.bingoModel)
+
+                }
             }
             isShown = false
         }
@@ -60,4 +82,7 @@ struct CameraView: UIViewControllerRepresentable {
             }
         }
     }
+    
 }
+
+
