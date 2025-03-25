@@ -10,20 +10,27 @@ struct SpeechProcessor {
     var optimizedText: String
     var transcriptedNumber: Int
     
-    mutating func processText(text: String) {
-        let text = text
-        optimizedText = text.replacingOccurrences(of: " ", with: "")
+    mutating func processText(text: String) -> Int {
+        optimizedText = optimizeText(text: text)
+        transcriptedNumber = extractNumber(optimizedText: optimizedText)
+        return transcriptedNumber
+    }
+    
+    mutating func optimizeText(text: String) -> String {
+        return text
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "[BINGO]", with: "", options: .regularExpression)
     }
     
     mutating func extractNumber(optimizedText: String) -> Int {
         transcriptedNumber = Int(optimizedText) ?? 0
         
-        if transcriptedNumber != 0 && transcriptedNumber < 76 {
+        if 0 < transcriptedNumber && transcriptedNumber < 76 {
             return transcriptedNumber
         } else {
-            print("No valid number found")
             return 0
         }
+        
     }
     
 }
