@@ -108,6 +108,7 @@ struct HomeView: View {
                 
             }
             .padding()
+//            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
             
 //            ConfettiCannon(trigger: $showConfetti, num: 50, confettiSize: 16, fadesOut: true)
         }
