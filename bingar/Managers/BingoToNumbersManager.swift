@@ -48,20 +48,22 @@ func processImageToNumbers(in image: UIImage, bingoModel: BingoModel) {
 // MARK: - Processamento dos Números Detectados
 func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoModel: BingoModel) {
     guard !numbers.isEmpty else { return }
+
+    // 1. First, sort by Y position (top to bottom)
+    let sortedByRow = numbers.sorted { $0.rect.minY < $1.rect.minY }
     
-    let sortedByRow = numbers.sorted { $0.rect.minY > $1.rect.minY }
-    
+    // 2. Group into 5 rows based on Y position clusters
     var rows: [[(number: String, rect: CGRect)]] = []
     var currentRow: [(number: String, rect: CGRect)] = []
     var lastY: CGFloat = -1
-    
-    let averageHeight = sortedByRow.map { $0.rect.height }.reduce(0, +) / CGFloat(sortedByRow.count)
-    let yThreshold = averageHeight * 0.6
+    let yThreshold: CGFloat = 50 // Adjust based on your card's spacing
     
     for item in sortedByRow {
         if lastY == -1 || abs(item.rect.minY - lastY) < yThreshold {
+            // Same row
             currentRow.append(item)
         } else {
+            // New row
             if !currentRow.isEmpty {
                 rows.append(currentRow)
                 currentRow = []
@@ -74,15 +76,29 @@ func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoMo
         rows.append(currentRow)
     }
     
-    var bingoGrid: [[Int?]] = Array(repeating: Array(repeating: nil, count: 5), count: 5)
+    // 3. Within each row, sort by X position (left to right)
+    //        var bingoGrid: [[Int?]] = []
+    var bingoGrid: [[Int?]] = []
     
-    for (rowIndex, row) in rows.enumerated() {
+    for row in rows {
         let sortedRow = row.sorted { $0.rect.minX < $1.rect.minX }
-        for (colIndex, item) in sortedRow.enumerated() {
-            bingoGrid[colIndex][rowIndex] = Int(item.number) // Store in column-major order
+        let rowNumbers: [Int?] = sortedRow.map { Int($0.number) }
+        bingoGrid.append(rowNumbers)
+    }
+    
+    // 4. Ensure we have a 5x5 grid with nil for the free space
+    while bingoGrid.count < 5 {
+        bingoGrid.append([nil, nil, nil, nil, nil])
+    }
+    
+    // Make sure each row has 5 elements
+    for i in 0..<bingoGrid.count {
+        while bingoGrid[i].count < 5 {
+            bingoGrid[i].append(nil)
         }
     }
     
+    // 5. Handle the center free space (if needed)
     if bingoGrid.count >= 3 && bingoGrid[2].count >= 3 {
         bingoGrid[2][2] = nil
     }
@@ -91,5 +107,3 @@ func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoMo
         bingoModel.updateNumbers(newNumbers: bingoGrid)
     }
 }
-
-
