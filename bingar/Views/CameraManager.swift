@@ -12,6 +12,8 @@ struct CameraManager: View {
     @State private var isShowingCamera = false
     @State private var capturedImage: UIImage?
     
+    var bingoModel: BingoModel
+    
     var body: some View {
         Button(action: {
             openCamera()
@@ -23,11 +25,12 @@ struct CameraManager: View {
                 .foregroundStyle(.black.opacity(0.7))
         }
         .fullScreenCover(isPresented: $isShowingCamera) {
-            CameraView(isShown: $isShowingCamera, capturedImage: $capturedImage)
+            CameraView(isShown: $isShowingCamera, capturedImage: $capturedImage, bingoModel: bingoModel)
         }
     }
     
     func openCamera() {
         isShowingCamera = true
     }
+    
 }

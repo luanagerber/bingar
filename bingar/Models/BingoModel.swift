@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import Vision
 import UIKit
 
 class BingoModel: ObservableObject {
@@ -21,7 +23,21 @@ class BingoModel: ObservableObject {
         self.bingoCard = BingoCard(from: initialNumbers)
     }
     
-    // Sort functions
+    // MARK: - Atualização da cartela de Bingo
+    func updateNumbers(newNumbers: [[Int?]]) {
+        guard newNumbers.count == 5, newNumbers.allSatisfy({ $0.count == 5 }) else {
+            print("Erro: A matriz deve ser 5x5")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.emptySortedNumbers()
+            self.bingoNumbers.numbers = newNumbers
+            self.bingoCard = BingoCard(from: self.bingoNumbers)
+        }
+    }
+    
+    // MARK: - Sorteio de números
     func sortNumber() {
         var number = Int.random(in: 1...75)
         
@@ -37,7 +53,7 @@ class BingoModel: ObservableObject {
         sortedNumbers.contains(number)
     }
     
-    // NewTurn functions
+    // MARK: - Novo Turno
     func callNewTurn() {
         sortNumber()
         
@@ -46,6 +62,7 @@ class BingoModel: ObservableObject {
         }
     }
     
+    // MARK: - Verificação de Vitória
     func checkVictory() -> Bool {
         return checkRow() || checkColumn() || checkDiagonal()
     }
@@ -60,7 +77,6 @@ class BingoModel: ObservableObject {
         impactGenerator.impactOccurred()
     }
     
-    // Check Victory Functions
     func checkRow() -> Bool {
         for row in bingoCard.matrix {
             if row.allSatisfy({ $0 == nil || checkIfSorted($0!) }) {
@@ -86,7 +102,7 @@ class BingoModel: ObservableObject {
     
     func checkDiagonal() -> Bool {
         let mainDiagonal = (0..<5).allSatisfy { index in
-            guard let number = bingoCard.matrix[index][index] else { return true } // Espaço livre
+            guard let number = bingoCard.matrix[index][index] else { return true }
             return checkIfSorted(number)
         }
         
@@ -98,17 +114,8 @@ class BingoModel: ObservableObject {
         return mainDiagonal || secondaryDiagonal
     }
     
+    // MARK: - Reset do Bingo
     func emptySortedNumbers() {
         sortedNumbers.removeAll()
-    }
-    
-    func updateNumbers(newNumbers: [[Int?]]) {
-        guard newNumbers.count == 5, newNumbers.allSatisfy({ $0.count == 5 }) else {
-            print("Erro: A matriz deve ser 5x5")
-            return
-        }
-        
-        bingoNumbers.numbers = newNumbers
-        bingoCard = BingoCard(from: bingoNumbers)
     }
 }

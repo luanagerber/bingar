@@ -12,26 +12,11 @@ struct CameraView: View {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
+    var bingoModel: BingoModel
+    
     var body: some View {
         ZStack {
-            CameraController(isShown: $isShown, capturedImage: $capturedImage)
-            
-            VStack {
-                HStack {
-                    Button(action: {
-                        isShown = false // This will dismiss the camera view
-                    }) {
-                        Image(systemName: "arrow.backward.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.white)
-//                            .padding()
-                    }
-                    
-                    Spacer()
-                }
-                Spacer()
-            }
+            CameraController(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
         }
     }
 }
@@ -39,6 +24,8 @@ struct CameraView: View {
 struct CameraController: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
+    
+    var bingoModel: BingoModel
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let controller = UIImagePickerController()
@@ -50,22 +37,29 @@ struct CameraController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(isShown: $isShown, capturedImage: $capturedImage)
+        Coordinator(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
     }
+    
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         @Binding var isShown: Bool
         @Binding var capturedImage: UIImage?
+        var bingoModel: BingoModel
         
-        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>) {
+        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoModel) {
             _isShown = isShown
             _capturedImage = capturedImage
+            self.bingoModel = bingoModel
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
                 capturedImage = image
-                saveImageToDocumentsDirectory(image)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    
+                    processImageToNumbers(in: image, bingoModel: self.bingoModel)
+
+                }
             }
             isShown = false
         }
@@ -82,13 +76,13 @@ struct CameraController: UIViewControllerRepresentable {
                 do {
                     try jpegData.write(to: imageFilename)
                     print("Image saved to: \(imageFilename.path)")
-                    detectBingoNumbers(in: image)
                 } catch {
                     print("Error saving image: \(error.localizedDescription)")
                 }
             }
         }
     }
+    
 }
 
 
