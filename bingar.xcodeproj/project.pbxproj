@@ -208,6 +208,9 @@
 			);
 			mainGroup = 4F781BFE2D80D047009F0370;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4F21A14D2D93159A003BC6F1 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4F781C082D80D047009F0370 /* Products */;
 			projectDirPath = "";
@@ -587,6 +590,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4F21A14D2D93159A003BC6F1 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 4F781BFF2D80D047009F0370 /* Project object */;
 }
