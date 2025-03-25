@@ -51,7 +51,7 @@ class BingoGridViewModel: ObservableObject {
     }
     
     func addSortedNumber(number: Int) {
-        if number != 0 {
+        if number != 0 && !sortedNumbers.contains(number) {
             sortedNumbers.insert(number)
         }
     }
