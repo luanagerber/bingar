@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "2C8EB2C3-843B-4752-8A04-9CC0E4931C79": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        },
+        "9AAA29B3-626A-437C-9EED-C2687D8D3949": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "BingoDetector.mlmodel",
+            "path": "com.apple.CoreML/BingoDetector.mlmodel"
+        },
+        "A52FE44D-B45F-47A2-B236-77AEC9C87596": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        }
+    },
+    "rootModelIdentifier": "9AAA29B3-626A-437C-9EED-C2687D8D3949"
+}

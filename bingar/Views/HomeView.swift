@@ -87,7 +87,7 @@ struct HomeView: View {
                 HStack(spacing: 70){
                     Spacer()
                     
-                    CameraManager(bingoModel: bingoModel)
+                    CameraButtonView(bingoModel: bingoModel)
                     
                     Button(action: {
                         bingoModel.callNewTurn()
