@@ -11,7 +11,7 @@ import AVFoundation
 import Foundation
 import Speech
 
-class SpeechRecognizer: ObservableObject {
+class SpeechViewModel: ObservableObject {
     
     ///Regonizer Errors
     enum RecognizerError: Error {

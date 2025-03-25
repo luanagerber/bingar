@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 
-struct CameraManager: View {
+struct CameraButton: View {
     @State private var isShowingCamera = false
     @State private var capturedImage: UIImage?
     

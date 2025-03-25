@@ -11,8 +11,9 @@ import AVFoundation
 import Foundation
 import Speech
 
-struct SpeechManagerView: View {
-    @StateObject var speechRecognizer = SpeechRecognizer()
+struct SpeechButton: View {
+    
+    @StateObject var speechRecognizer = SpeechViewModel()
     @State private var isRecording = false
     @State var transcrip: String = ""
     
@@ -32,16 +33,16 @@ struct SpeechManagerView: View {
     }
     
     func handleButtonTap() {
-//        if isRecording {
-//            speechRecognizer.stopTranscribing()
-//            isRecording = false
-//            transcrip = speechRecognizer.transcript
-//            print(transcrip)
-//        } else {
-//            speechRecognizer.resetTranscript()
-//            speechRecognizer.startTranscribing()
-//            isRecording = true
-//        }
+        if isRecording {
+            speechRecognizer.stopTranscribing()
+            isRecording = false
+            transcrip = speechRecognizer.transcript
+            print(transcrip)
+        } else {
+            speechRecognizer.resetTranscript()
+            speechRecognizer.startTranscribing()
+            isRecording = true
+        }
     }
     
 }
