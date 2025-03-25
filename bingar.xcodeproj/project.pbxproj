@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		4FC25B8E2D83D65E0032465E /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4FC25B8D2D83D65E0032465E /* ConfettiSwiftUI */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		4F781C182D80D049009F0370 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -69,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FC25B8E2D83D65E0032465E /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +125,6 @@
 			);
 			name = bingar;
 			packageProductDependencies = (
-				4FC25B8D2D83D65E0032465E /* ConfettiSwiftUI */,
 			);
 			productName = bingar;
 			productReference = 4F781C072D80D047009F0370 /* bingar.app */;
@@ -214,9 +208,6 @@
 			);
 			mainGroup = 4F781BFE2D80D047009F0370;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				4FC25B8C2D83D65E0032465E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4F781C082D80D047009F0370 /* Products */;
 			projectDirPath = "";
@@ -596,25 +587,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		4FC25B8C2D83D65E0032465E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4FC25B8D2D83D65E0032465E /* ConfettiSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4FC25B8C2D83D65E0032465E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
-			productName = ConfettiSwiftUI;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4F781BFF2D80D047009F0370 /* Project object */;
 }
