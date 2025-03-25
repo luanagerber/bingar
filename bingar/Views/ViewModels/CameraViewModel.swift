@@ -25,6 +25,7 @@ class CameraViewModel {
     var thumbnailCGImage: CGImage? = nil {
         didSet {
             if let cgImage = thumbnailCGImage {
+                print("cccccc")
                 thumbnailUIImage = UIImage(cgImage: cgImage)
             }
         }
@@ -76,7 +77,7 @@ class CameraViewModel {
         guard let previewCGImage = photo.previewCGImageRepresentation(),
            let metadataOrientation = photo.metadata[String(kCGImagePropertyOrientation)] as? UInt32,
               let cgImageOrientation = CGImagePropertyOrientation(rawValue: metadataOrientation) else { return nil }
-        let imageOrientation = Image.Orientation.right
+        let imageOrientation = Image.Orientation(cgImageOrientation)
         let thumbnailImage = Image(decorative: previewCGImage, scale: 1, orientation: imageOrientation)
         
         thumbnailCGImage = previewCGImage
@@ -109,14 +110,14 @@ fileprivate extension Image.Orientation {
 
     init(_ cgImageOrientation: CGImagePropertyOrientation) {
         switch cgImageOrientation {
-        case .up: self = .up
-        case .upMirrored: self = .upMirrored
-        case .down: self = .down
-        case .downMirrored: self = .downMirrored
-        case .left: self = .left
-        case .leftMirrored: self = .leftMirrored
-        case .right: self = .right
-        case .rightMirrored: self = .rightMirrored
+        case .up: self = .right
+        case .upMirrored: self = .rightMirrored
+        case .down: self = .left
+        case .downMirrored: self = .leftMirrored
+        case .left: self = .up
+        case .leftMirrored: self = .upMirrored
+        case .right: self = .down
+        case .rightMirrored: self = .downMirrored
         }
     }
 }

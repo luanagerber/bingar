@@ -11,7 +11,7 @@ import ConfettiSwiftUI
 struct HomeView: View {
     
     @StateObject private var bingoModel = BingoViewModel()
-
+    @State private var viewModel = CameraViewModel()
     
 //    @State private var showConfetti = false
     
@@ -41,53 +41,12 @@ struct HomeView: View {
                 
                 BingoGridView(bingoModel: bingoModel)
                 
-                /// BINGO GRID
-//                ZStack{
-//                    Rectangle()
-//                        .fill(Color.white)
-//                        .padding(16)
-//                        .shadow(radius: 2)
-//                    
-//                    VStack(spacing: 6.5) {
-//                        
-//                        HStack(spacing: 12){
-//                            BingoTitle(text: "B")
-//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                            BingoTitle(text: "I")
-//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                            BingoTitle(text: "N")
-//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                            BingoTitle(text: "G")
-//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                            BingoTitle(text: "O")
-//                                .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                        }.padding(.top, 2)
-//                        
-//                        ForEach(0..<5, id: \.self) { column in
-//                            HStack(spacing: 12) {
-//                                
-//                                ForEach(0..<5, id: \.self) { line in
-//                                    if let number = bingoModel.bingoCard.matrix[line][column] {
-//                                        BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
-//                                            .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                                    } else {
-//                                        BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
-//                                            .frame(width: elementWidht, height: elementHeight, alignment: .center)
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    
-//                }.frame(width: 350, height: 380)
-                /// FIM DA BINGOGRID
-                
                 Spacer()
                 
                 HStack(spacing: 70){
                     Spacer()
                     
-                    CameraButtonView(bingoModel: bingoModel)
+                    CameraButtonView(cameraViewModel: $viewModel)
                     
                     Button(action: {
                         bingoModel.callNewTurn()
@@ -109,9 +68,23 @@ struct HomeView: View {
                     
                 }.padding()
                 
+                if let cgImage = viewModel.thumbnailCGImage {
+                    Image(decorative: cgImage, scale: 0.5)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                }
             }
             .padding()
+            
+            
 
+        }
+        .environmentObject(bingoModel)
+        .onChange(of: viewModel.thumbnailUIImage) {
+                        
+            if let uiImage = viewModel.thumbnailUIImage {
+                processImageToNumbers(in: uiImage, bingoModel: bingoModel)
+            }
         }
         
     }
