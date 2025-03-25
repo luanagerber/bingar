@@ -10,7 +10,7 @@ import ConfettiSwiftUI
 
 struct HomeView: View {
     
-    @StateObject private var bingoModel = BingoViewModel()
+    @StateObject private var bingoViewModel = BingoGridViewModel()
     
 //    @State private var showConfetti = false
     
@@ -22,7 +22,7 @@ struct HomeView: View {
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack{
-                Text(bingoModel.victoryMessage)
+                Text(bingoViewModel.victoryMessage)
                     .font(.largeTitle)
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
@@ -35,18 +35,18 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                BingoGridView(bingoModel: bingoModel)
+                BingoGridView(bingoViewModel: bingoViewModel)
                 
                 Spacer()
                 
                 HStack(spacing: 70){
                     Spacer()
                     
-                    CameraButton(bingoModel: bingoModel)
+                    CameraButtonView(bingoViewModel: bingoViewModel)
                     
                     Button(action: {
-                        bingoModel.callNewTurn()
-                        if bingoModel.checkVictory(){
+                        bingoViewModel.callNewTurn()
+                        if bingoViewModel.checkVictory(){
 //                            showConfetti = true
                         }
                     }) {
@@ -57,17 +57,15 @@ struct HomeView: View {
                             .foregroundStyle(.black.opacity(0.7))
                     }
                     
-                    SpeechButton(bingoModel: bingoModel)
+                    SpeechButtonView()
                     
                     Spacer()
                     
                 }.padding()
-                
             }
             .padding()
-
         }
-        
+        .environmentObject(bingoViewModel)
     }
     
 }

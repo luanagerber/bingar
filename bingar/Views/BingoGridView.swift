@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BingoGridView: View {
     
-    @ObservedObject var bingoModel: BingoViewModel
+    @ObservedObject var bingoViewModel: BingoGridViewModel
 
     let elementWidht: CGFloat = 47
     let elementHeight: CGFloat = 41
@@ -18,7 +18,6 @@ struct BingoGridView: View {
     var body: some View {
         
         ZStack{
-            
             Rectangle()
                 .fill(Color.white)
                 .padding(16)
@@ -40,25 +39,21 @@ struct BingoGridView: View {
                 
                 ForEach(0..<5, id: \.self) { column in
                     HStack(spacing: 12) {
-                        //                                BingoTitle(text: titles[column]) // Título da coluna
-                        
-                        // Percorrendo os números da coluna (invertendo linha e coluna)
+                        // Percorrendo os números da coluna
                         ForEach(0..<5, id: \.self) { line in
-                            if let number = bingoModel.bingoCard.matrix[line][column] {
-                                BingoNumber(number: number, isActive: bingoModel.checkIfSorted(number))
+                            if let number = bingoViewModel.bingoCard.matrix[line][column] {
+                                BingoNumber(number: number, isActive: bingoViewModel.checkIfSorted(number))
                                     .frame(width: elementWidht, height: elementHeight, alignment: .center)
                             } else {
                                 BingoSymbol(symbol: "lizard.fill") // Espaço livre no centro
                                     .frame(width: elementWidht, height: elementHeight, alignment: .center)
                             }
-                            
                         }
                     }
                 }
+                
             }
-            
         }.frame(width: 350, height: 380)
-        
         
     }
 }

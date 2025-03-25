@@ -10,12 +10,13 @@ import SwiftUI
 import Vision
 import UIKit
 
-class BingoViewModel: ObservableObject {
+class BingoGridViewModel: ObservableObject {
     @Published var bingoNumbers: BingoNumbers
     @Published var bingoCard: BingoCard
     
     @Published var sortedNumbers: Set<Int> = []
     @Published var victoryMessage: String = ""
+    @Published var extractedNumber: Int?
     
     init() {
         let initialNumbers = BingoNumbers()
@@ -47,6 +48,12 @@ class BingoViewModel: ObservableObject {
         
         sortedNumbers.insert(number)
         print(number)
+    }
+    
+    func addSortedNumber(number: Int) {
+        if number != 0 {
+            sortedNumbers.insert(number)
+        }
     }
     
     func checkIfSorted(_ number: Int) -> Bool {

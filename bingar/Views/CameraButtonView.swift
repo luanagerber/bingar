@@ -8,11 +8,11 @@
 import SwiftUI
 import AVFoundation
 
-struct CameraButton: View {
+struct CameraButtonView: View {
     @State private var isShowingCamera = false
     @State private var capturedImage: UIImage?
     
-    var bingoModel: BingoViewModel
+    var bingoViewModel: BingoGridViewModel
     
     var body: some View {
         Button(action: {
@@ -25,7 +25,7 @@ struct CameraButton: View {
                 .foregroundStyle(.black.opacity(0.7))
         }
         .fullScreenCover(isPresented: $isShowingCamera) {
-            CameraView(isShown: $isShowingCamera, capturedImage: $capturedImage, bingoModel: bingoModel)
+            CameraView(isShown: $isShowingCamera, capturedImage: $capturedImage, bingoModel: bingoViewModel)
         }
     }
     

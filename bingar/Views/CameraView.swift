@@ -12,11 +12,11 @@ struct CameraView: View {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
-    var bingoModel: BingoViewModel
+    var bingoModel: BingoGridViewModel
     
     var body: some View {
         ZStack {
-            CameraController(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
+            CameraController(isShown: $isShown, capturedImage: $capturedImage, bingoViewModel: bingoModel)
         }
     }
 }
@@ -25,7 +25,7 @@ struct CameraController: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var capturedImage: UIImage?
     
-    var bingoModel: BingoViewModel
+    var bingoViewModel: BingoGridViewModel
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let controller = UIImagePickerController()
@@ -37,16 +37,16 @@ struct CameraController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoModel)
+        Coordinator(isShown: $isShown, capturedImage: $capturedImage, bingoModel: bingoViewModel)
     }
     
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         @Binding var isShown: Bool
         @Binding var capturedImage: UIImage?
-        var bingoModel: BingoViewModel
+        var bingoModel: BingoGridViewModel
         
-        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoViewModel) {
+        init(isShown: Binding<Bool>, capturedImage: Binding<UIImage?>, bingoModel: BingoGridViewModel) {
             _isShown = isShown
             _capturedImage = capturedImage
             self.bingoModel = bingoModel

@@ -9,7 +9,7 @@ import SwiftUI
 import Vision
 import UIKit
 
-func processImageToNumbers(in image: UIImage, bingoModel: BingoViewModel) {
+func processImageToNumbers(in image: UIImage, bingoModel: BingoGridViewModel) {
     guard let cgImage = image.cgImage else { return }
     
     let textRequest = VNRecognizeTextRequest { request, error in
@@ -46,7 +46,7 @@ func processImageToNumbers(in image: UIImage, bingoModel: BingoViewModel) {
 
 
 // MARK: - Processamento dos Números Detectados
-func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoModel: BingoViewModel) {
+func processDetectedNumbers(_ numbers: [(number: String, rect: CGRect)], bingoModel: BingoGridViewModel) {
     guard !numbers.isEmpty else { return }
 
     // 1. First, sort by Y position (top to bottom)
