@@ -24,7 +24,6 @@ class SpeechButtonViewModel: ObservableObject {
             
             let extractedNumber = processText(text: transcript)
             bingoViewModel.addSortedNumber(number: extractedNumber)
-
         } else {
             speechTranscriptor.resetTranscript()
             speechTranscriptor.startTranscribing()
