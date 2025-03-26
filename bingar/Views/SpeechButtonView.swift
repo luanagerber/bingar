@@ -16,7 +16,7 @@ struct SpeechButtonView: View {
     @State var isRecording: Bool = false
     @State var transcript: String = ""
     
-    var speechTranscriptor = SpeechTranscriptor()
+    let speechTranscriptor = SpeechTranscriptor()
     
     @EnvironmentObject var bingoViewModel: BingoGridViewModel
     
@@ -41,7 +41,9 @@ struct SpeechButtonView: View {
             
             let extractedNumber = processText(text: transcript)
             bingoViewModel.addSortedNumber(number: extractedNumber)
-            print(bingoViewModel.sortedNumbers)
+            
+            print("sortedNumbers: \(bingoViewModel.sortedNumbers)")
+            
         } else {
             speechTranscriptor.resetTranscript()
             speechTranscriptor.startTranscribing()
