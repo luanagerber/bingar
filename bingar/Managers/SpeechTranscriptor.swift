@@ -143,6 +143,7 @@ class SpeechTranscriptor: ObservableObject {
     nonisolated private func transcribe(_ message: String) {
         Task { @MainActor in
             transcript = message
+            print("Transcripted Message: \(message)")
         }
     }
     
