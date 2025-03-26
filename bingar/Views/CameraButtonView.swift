@@ -13,7 +13,7 @@ struct CameraButtonView: View {
     @State private var capturedImage: UIImage?
     
     @Binding var cameraViewModel: CameraViewModel
-    @EnvironmentObject var bingoViewModel: BingoGridViewModel
+    @EnvironmentObject var bingoViewModel: BingoViewModel
         
     var body: some View {
         Button(action: {

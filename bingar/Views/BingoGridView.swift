@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BingoGridView: View {
     
-    @ObservedObject var bingoViewModel: BingoGridViewModel
+    @ObservedObject var bingoViewModel: BingoViewModel
 
     let elementWidht: CGFloat = 47
     let elementHeight: CGFloat = 41

@@ -10,7 +10,7 @@ import ConfettiSwiftUI
 
 struct InitialView: View {
     
-    @StateObject private var bingoViewModel = BingoGridViewModel()
+    @StateObject private var bingoViewModel = BingoViewModel()
     @State private var cameraViewModel = CameraViewModel()
         
     @State private var showConfetti = false
