@@ -40,6 +40,13 @@ struct InitialView: View {
                 
                 Spacer()
                 
+                if let cgImage = cameraViewModel.thumbnailCGImage {
+                    Image(decorative: cgImage, scale: 0.5, orientation: .right)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .padding(.bottom, 20)
+                }
+                
                 HStack(spacing: 70){
                     Spacer()
                     
@@ -63,12 +70,6 @@ struct InitialView: View {
                     Spacer()
                     
                 }.padding()
-                
-                if let cgImage = cameraViewModel.thumbnailCGImage {
-                    Image(decorative: cgImage, scale: 0.5)
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                }
             }
             .padding()
         }

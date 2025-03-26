@@ -25,7 +25,6 @@ class CameraViewModel {
     var thumbnailCGImage: CGImage? = nil {
         didSet {
             if let cgImage = thumbnailCGImage {
-                print("cccccc")
                 thumbnailUIImage = UIImage(cgImage: cgImage)
             }
         }

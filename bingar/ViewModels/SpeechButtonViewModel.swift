@@ -14,7 +14,7 @@ class SpeechButtonViewModel: ObservableObject {
     @State var isRecording = false
     @State var transcript: String = ""
     
-    @EnvironmentObject var bingoModel: BingoGridViewModel
+    @EnvironmentObject var bingoViewModel: BingoGridViewModel
     
     func handleButtonTap() {
         if isRecording {
@@ -23,7 +23,7 @@ class SpeechButtonViewModel: ObservableObject {
             transcript = speechTranscriptor.transcript
             
             let extractedNumber = processText(text: transcript)
-            bingoModel.addSortedNumber(number: extractedNumber)
+            bingoViewModel.addSortedNumber(number: extractedNumber)
 
         } else {
             speechTranscriptor.resetTranscript()
