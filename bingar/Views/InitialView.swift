@@ -75,12 +75,12 @@ struct InitialView: View {
             .padding()
         }
         .environmentObject(viewModel.bingoViewModel)
-//        .onChange(of: viewModel.thumbnailUIImage) {
+        .onChange(of: viewModel.cameraViewModel.thumbnailUIImage) {
                         
-//            if let uiImage = viewModel.thumbnailUIImage {
-//                viewModel.processImageToNumbers(in: uiImage, bingoModel: viewModel.bingoViewModel)
-//            }
-//        }
+            if let uiImage = viewModel.cameraViewModel.thumbnailUIImage {
+                viewModel.processImageToNumbers(uiImage)
+            }
+        }
     }
     
 }

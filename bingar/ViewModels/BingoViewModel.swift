@@ -35,7 +35,7 @@ class BingoViewModel: ObservableObject {
             self.bingoNumbers.numbers = newNumbers
             self.bingoCard = BingoCard(from: self.bingoNumbers)
             
-            self.objectWillChange.send()
+//            self.objectWillChange.send()
         }
     }
     

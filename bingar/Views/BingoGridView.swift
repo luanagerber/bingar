@@ -55,9 +55,9 @@ struct BingoGridView: View {
                 
             }
         }.frame(width: 350, height: 380)
-            .onReceive(bingoViewModel.objectWillChange) { _ in
-                print("BingoGridView updating")
-            }
+//            .onReceive(bingoViewModel.objectWillChange) { _ in
+//                print("BingoGridView updating")
+//            }
         
     }
 }
