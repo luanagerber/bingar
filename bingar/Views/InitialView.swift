@@ -44,12 +44,13 @@ struct InitialView: View {
                             .padding(.bottom, 30)
                     } else if speechViewModel.extractedNumber != 0 {
                         Text("\(speechViewModel.extractedNumber)")
-                            .font(.title)
+                            .font(.largeTitle)
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
-                            .frame(width: 50, height: 50, alignment: .center)
+                            .padding(.top, 30)
+                            .padding(.bottom, 30)
                     }
-                                        
+                    
                 }.frame(width: 350, height: 50)
                     .padding()
                 
