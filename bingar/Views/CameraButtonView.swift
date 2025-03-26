@@ -35,7 +35,7 @@ struct CameraButtonView: View {
                 }
             } label: {
                 Label {
-                    Text("Take Photo")
+//                    Text("Take Photo")
                 } icon: {
                     ZStack {
                         Circle()
@@ -44,7 +44,7 @@ struct CameraButtonView: View {
                         Circle()
                             .fill(.white)
                             .frame(width: 50, height: 50)
-                    }
+                    }.padding(.bottom, 5)
                 }
             }
         }
