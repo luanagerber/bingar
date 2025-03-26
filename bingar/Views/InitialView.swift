@@ -21,12 +21,7 @@ struct InitialView: View {
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack{
-                Text(viewModel.bingoViewModel.victoryMessage)
-                    .font(.largeTitle)
-                    .foregroundStyle(.pink)
-                    .fontWeight(.semibold)
-                    .padding(.top, 30)
-                    .padding(.bottom, 30)
+                
                 
                 Spacer()
             }
@@ -39,18 +34,22 @@ struct InitialView: View {
                     .confettiCannon(trigger: $viewModel.showConfetti, num: 50, openingAngle: .degrees(0), closingAngle: .degrees(360), radius: 200)
                 
                 HStack{
-                    Spacer()
                     
-                    if speechViewModel.extractedNumber != 0 {
+                    if viewModel.bingoViewModel.checkVictory(){
+                        Text(viewModel.bingoViewModel.victoryMessage)
+                            .font(.largeTitle)
+                            .foregroundStyle(.pink)
+                            .fontWeight(.semibold)
+                            .padding(.top, 30)
+                            .padding(.bottom, 30)
+                    } else if speechViewModel.extractedNumber != 0 {
                         Text("\(speechViewModel.extractedNumber)")
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
                             .frame(width: 50, height: 50, alignment: .center)
                     }
-                    
-                    Spacer()
-                    
+                                        
                 }.frame(width: 350, height: 50)
                     .padding()
                 
