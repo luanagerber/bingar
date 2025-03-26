@@ -61,10 +61,6 @@ class SpeechTranscriptor: ObservableObject {
     }
     
     @MainActor func startTranscribing() {
-//        Task {
-//            transcribe()
-//        }
-        
         Task {
             reset()  // Clear the previous transcript before starting
             transcribe()
@@ -79,10 +75,6 @@ class SpeechTranscriptor: ObservableObject {
     }
     
     @MainActor func stopTranscribing() {
-//        Task {
-//            reset()
-//        }
-        
         Task {
             audioEngine?.stop()  // Stop audio engine without resetting transcript
             audioEngine?.inputNode.removeTap(onBus: 0)
