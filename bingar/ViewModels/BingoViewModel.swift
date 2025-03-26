@@ -34,6 +34,8 @@ class BingoViewModel: ObservableObject {
             self.emptySortedNumbers()
             self.bingoNumbers.numbers = newNumbers
             self.bingoCard = BingoCard(from: self.bingoNumbers)
+            
+            self.objectWillChange.send()
         }
     }
     
