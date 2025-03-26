@@ -53,6 +53,10 @@ class BingoViewModel: ObservableObject {
         if number != 0 && !sortedNumbers.contains(number) {
             sortedNumbers.insert(number)
         }
+        
+        if checkVictory() {
+            triggerVictory()
+        }
     }
     
     func checkIfSorted(_ number: Int) -> Bool {
