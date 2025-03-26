@@ -14,9 +14,8 @@ import Speech
 struct SpeechButtonView: View {
     
     @State var isRecording: Bool = false
-    @State var transcript: String = ""
     
-    let speechTranscriptor = SpeechTranscriptor()
+    @ObservedObject var speechTranscriptor = SpeechTranscriptor()
     
     @EnvironmentObject var bingoViewModel: BingoGridViewModel
     
@@ -35,26 +34,24 @@ struct SpeechButtonView: View {
     
     func handleButtonTap() {
         if isRecording {
-            speechTranscriptor.transcript = transcript
             speechTranscriptor.stopTranscribing()
             isRecording = false
             
-            let extractedNumber = processText(text: transcript)
+            let extractedNumber = processText(text: speechTranscriptor.transcript)  // Now uses the real transcript
             bingoViewModel.addSortedNumber(number: extractedNumber)
             
             print("sortedNumbers: \(bingoViewModel.sortedNumbers)")
             
         } else {
-            speechTranscriptor.resetTranscript()
-            speechTranscriptor.startTranscribing()
             isRecording = true
+            speechTranscriptor.startTranscribing()  // No need to reset transcript manually
         }
     }
     
     func processText(text: String) -> Int {
         let optimizedText = optimizeText(text: text)
-        print("optimizedText: \(text)")
-
+        print("optimizedText: \(optimizedText)")
+        
         let transcriptedNumber = extractNumber(optimizedText: optimizedText)
         print("transcriptedNumber: \(transcriptedNumber)")
 
@@ -67,7 +64,7 @@ struct SpeechButtonView: View {
             .replacingOccurrences(of: "[BINGO]", with: "", options: .regularExpression)
         
         return text
-            
+        
     }
     
     func extractNumber(optimizedText: String) -> Int {
