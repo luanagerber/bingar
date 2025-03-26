@@ -60,8 +60,7 @@ struct SpeechButtonView: View {
     
     func optimizeText(text: String) -> String {
         let text = text
-            .replacingOccurrences(of: " ", with: "")
-            .replacingOccurrences(of: "[BINGO]", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression) // Keep only numbers
         
         return text
         

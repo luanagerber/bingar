@@ -12,7 +12,7 @@ struct InitialView: View {
     
     @StateObject private var bingoViewModel = BingoGridViewModel()
     @State private var cameraViewModel = CameraViewModel()
-    
+        
     @State private var showConfetti = false
     
     var body: some View {
@@ -40,11 +40,16 @@ struct InitialView: View {
                 
                 Spacer()
                 
-                if let cgImage = cameraViewModel.thumbnailCGImage {
-                    Image(decorative: cgImage, scale: 0.5, orientation: .right)
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .padding(.bottom, 20)
+                HStack{
+                    if let cgImage = cameraViewModel.thumbnailCGImage {
+                        Image(decorative: cgImage, scale: 0.5, orientation: .right)
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .padding(.bottom, 20)
+                    }
+                    
+                    Spacer()
+                                        
                 }
                 
                 HStack(spacing: 70){
