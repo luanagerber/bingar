@@ -11,7 +11,7 @@ import ConfettiSwiftUI
 struct InitialView: View {
     
     @StateObject private var viewModel = InitialViewModel()
-    
+    @StateObject private var speechViewModel = SpeechViewModel()
     
     var body: some View {
         
@@ -25,7 +25,8 @@ struct InitialView: View {
                     .font(.largeTitle)
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
-                    .padding(.top, 70)
+                    .padding(.top, 30)
+                    .padding(.bottom, 30)
                 
                 Spacer()
             }
@@ -36,20 +37,25 @@ struct InitialView: View {
                 
                 BingoGridView()
                     .confettiCannon(trigger: $viewModel.showConfetti, num: 50, openingAngle: .degrees(0), closingAngle: .degrees(360), radius: 200)
-
+                
                 
                 Spacer()
                 
                 HStack{
-                    if let cgImage = viewModel.cameraViewModel.thumbnailCGImage {
-                        Image(decorative: cgImage, scale: 0.5, orientation: .right)
-                            .resizable()
-                            .frame(width: 100, height: 100)
+                    Spacer()
+                    
+                    if speechViewModel.extractedNumber != 0 {
+                        Text("\(speechViewModel.extractedNumber)")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.black)
+                            .frame(width: 50, height: 50, alignment: .center)
                     }
                     
-//                    Spacer()
-                }
-                .padding(.bottom, 20)
+                    Spacer()
+                    
+                }.frame(width: 350, height: 50)
+                    .padding()
                 
                 HStack(spacing: 70){
                     Spacer()
@@ -66,7 +72,7 @@ struct InitialView: View {
                             .foregroundStyle(.black.opacity(0.7))
                     }
                     
-                    SpeechButtonView()
+                    SpeechButtonView(speechViewModel: speechViewModel)
                     
                     Spacer()
                     
@@ -76,7 +82,7 @@ struct InitialView: View {
         }
         .environmentObject(viewModel.bingoViewModel)
         .onChange(of: viewModel.cameraViewModel.thumbnailUIImage) {
-                        
+            
             if let uiImage = viewModel.cameraViewModel.thumbnailUIImage {
                 viewModel.processImageToNumbers(uiImage)
             }

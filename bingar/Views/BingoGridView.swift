@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BingoGridView: View {
     
-    //    @ObservedObject var bingoViewModel: BingoViewModel
     @EnvironmentObject var bingoViewModel: BingoViewModel
     
     let elementWidht: CGFloat = 47
@@ -55,9 +54,6 @@ struct BingoGridView: View {
                 
             }
         }.frame(width: 350, height: 380)
-//            .onReceive(bingoViewModel.objectWillChange) { _ in
-//                print("BingoGridView updating")
-//            }
         
     }
 }

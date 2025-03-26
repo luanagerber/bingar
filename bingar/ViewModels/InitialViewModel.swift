@@ -12,15 +12,15 @@ class InitialViewModel: ObservableObject {
     @Published var bingoViewModel: BingoViewModel
     @Published var cameraViewModel: CameraViewModel
     @Published var bingoNumbersExtractor: BingoNumbersExtractor
-
+    
     @Published var showConfetti = false
         
 
     init() {
-            self.bingoViewModel = BingoViewModel()
-            self.cameraViewModel = CameraViewModel()
-            self.bingoNumbersExtractor = BingoNumbersExtractor()
-        }
+        self.bingoViewModel = BingoViewModel()
+        self.cameraViewModel = CameraViewModel()
+        self.bingoNumbersExtractor = BingoNumbersExtractor()
+    }
     
     func processImageToNumbers(_ image: UIImage) {
         bingoNumbersExtractor.processImageToNumbers(in: image, bingoModel: bingoViewModel)

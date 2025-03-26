@@ -11,7 +11,7 @@ struct BingoNumbers {
     var numbers: [[Int?]] = Array(repeating: Array(repeating: nil, count: 5), count: 5)
 }
 
-// Estrutura que cria uma matriz 5x5 baseada em BingoNumbers
+// Estrutura que cria uma matriz baseada em BingoNumbers
 struct BingoCard {
     var matrix: [[Int?]]
     

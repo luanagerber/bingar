@@ -11,7 +11,7 @@ import Speech
 class SpeechViewModel: ObservableObject {
     
     @Published var isRecording: Bool = false
-    @Published var extractedNumber: Int = 0
+    @Published var extractedNumber: Int = 00
     @Published var transcript: String = ""
     
     private var speechTranscriptor = SpeechTranscriptor()
