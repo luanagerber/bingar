@@ -12,6 +12,7 @@ struct InitialView: View {
     
     @StateObject private var viewModel = InitialViewModel()
     
+    
     var body: some View {
         
         ZStack {
@@ -74,6 +75,12 @@ struct InitialView: View {
             .padding()
         }
         .environmentObject(viewModel.bingoViewModel)
+//        .onChange(of: viewModel.thumbnailUIImage) {
+                        
+//            if let uiImage = viewModel.thumbnailUIImage {
+//                viewModel.processImageToNumbers(in: uiImage, bingoModel: viewModel.bingoViewModel)
+//            }
+//        }
     }
     
 }

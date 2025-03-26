@@ -10,7 +10,7 @@ import SwiftUI
 import Vision
 import UIKit
 
-class BingoNumbersExtractor {
+struct BingoNumbersExtractor {
     
     func processImageToNumbers(in image: UIImage, bingoModel: BingoViewModel) {
         guard let cgImage = image.cgImage else { return }
