@@ -8,29 +8,26 @@
 import SwiftUI
 
 class SpeechButtonViewModel: ObservableObject {
-//    var transcriptedText: String
     
-    @StateObject var speechRecognizer = SpeechTranscriptor()
+    @StateObject var speechTranscriptor = SpeechTranscriptor()
     
     @State var isRecording = false
     @State var transcript: String = ""
-    @State var extractedNumber: Int?
     
     @EnvironmentObject var bingoModel: BingoGridViewModel
     
     func handleButtonTap() {
         if isRecording {
-            speechRecognizer.stopTranscribing()
+            speechTranscriptor.stopTranscribing()
             isRecording = false
-            transcript = speechRecognizer.transcript
-            extractedNumber = processText(text: transcript)
-            bingoModel.extractedNumber = extractedNumber
+            transcript = speechTranscriptor.transcript
             
-            print("bingoModel.extractedNumber: ", bingoModel.extractedNumber!)
-            
+            let extractedNumber = processText(text: transcript)
+            bingoModel.addSortedNumber(number: extractedNumber)
+
         } else {
-            speechRecognizer.resetTranscript()
-            speechRecognizer.startTranscribing()
+            speechTranscriptor.resetTranscript()
+            speechTranscriptor.startTranscribing()
             isRecording = true
         }
     }

@@ -16,7 +16,6 @@ class BingoGridViewModel: ObservableObject {
     
     @Published var sortedNumbers: Set<Int> = []
     @Published var victoryMessage: String = ""
-    @Published var extractedNumber: Int?
     
     init() {
         let initialNumbers = BingoNumbers()

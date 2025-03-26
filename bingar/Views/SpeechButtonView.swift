@@ -1,5 +1,5 @@
 //
-//  SpeechManager.swift
+//  SpeechButtonView.swift
 //  bingar
 //
 //  Created by Luana Gerber on 25/03/25.
@@ -13,22 +13,22 @@ import Speech
 
 struct SpeechButtonView: View {
 
-    @StateObject var speechProcessor = SpeechButtonViewModel()
+//    @StateObject var speechProcessor = SpeechButtonViewModel()
     
-    @StateObject var speechRecognizer = SpeechTranscriptor()
+    @StateObject var speechTranscriptor = SpeechTranscriptor()
     
 //    @EnvironmentObject var bingoModel: BingoViewModel
     
     var body: some View {
         Button(action: {
-            speechProcessor.handleButtonTap()
+//            speechProcessor.handleButtonTap()
         }) {
-            Image(systemName: speechProcessor.isRecording ? "stop.circle" : "mic.circle")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
-                .fontWeight(.light)
-                .foregroundColor(speechProcessor.isRecording ? .pink : .black.opacity(0.7))
+//            Image(systemName: speechProcessor.isRecording ? "stop.circle" : "mic.circle")
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 50, height: 50)
+//                .fontWeight(.light)
+//                .foregroundColor(speechProcessor.isRecording ? .pink : .black.opacity(0.7))
         }
     }
     
