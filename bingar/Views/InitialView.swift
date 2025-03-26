@@ -38,9 +38,6 @@ struct InitialView: View {
                 BingoGridView()
                     .confettiCannon(trigger: $viewModel.showConfetti, num: 50, openingAngle: .degrees(0), closingAngle: .degrees(360), radius: 200)
                 
-                
-                Spacer()
-                
                 HStack{
                     Spacer()
                     
@@ -56,6 +53,8 @@ struct InitialView: View {
                     
                 }.frame(width: 350, height: 50)
                     .padding()
+                
+                Spacer()
                 
                 HStack(spacing: 70){
                     Spacer()
