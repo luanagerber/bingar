@@ -10,7 +10,6 @@ import SwiftUI
 struct SpeechButtonView: View {
     
     @ObservedObject var speechViewModel = SpeechViewModel()
-    
     @EnvironmentObject var bingoViewModel: BingoViewModel
     
     var body: some View {

@@ -10,10 +10,7 @@ import ConfettiSwiftUI
 
 struct InitialView: View {
     
-    @StateObject private var bingoViewModel = BingoViewModel()
-    @State private var cameraViewModel = CameraViewModel()
-        
-    @State private var showConfetti = false
+    @StateObject private var viewModel = InitialViewModel()
     
     var body: some View {
         
@@ -23,7 +20,7 @@ struct InitialView: View {
             Color.blue.opacity(0.1).edgesIgnoringSafeArea(.all)
             
             VStack{
-                Text(bingoViewModel.victoryMessage)
+                Text(viewModel.bingoViewModel.victoryMessage)
                     .font(.largeTitle)
                     .foregroundStyle(.pink)
                     .fontWeight(.semibold)
@@ -36,33 +33,30 @@ struct InitialView: View {
                 
                 Spacer()
                 
-                BingoGridView(bingoViewModel: bingoViewModel)
-                    .confettiCannon(trigger: $showConfetti, num: 50, openingAngle: Angle(degrees: 0), closingAngle: Angle(degrees: 360), radius: 200)
+                BingoGridView()
+                    .confettiCannon(trigger: $viewModel.showConfetti, num: 50, openingAngle: .degrees(0), closingAngle: .degrees(360), radius: 200)
+
                 
                 Spacer()
                 
                 HStack{
-                    if let cgImage = cameraViewModel.thumbnailCGImage {
+                    if let cgImage = viewModel.cameraViewModel.thumbnailCGImage {
                         Image(decorative: cgImage, scale: 0.5, orientation: .right)
                             .resizable()
                             .frame(width: 100, height: 100)
-                            .padding(.bottom, 20)
                     }
                     
-                    Spacer()
-                                        
+//                    Spacer()
                 }
+                .padding(.bottom, 20)
                 
                 HStack(spacing: 70){
                     Spacer()
                     
-                    CameraButtonView(cameraViewModel: $cameraViewModel)
+                    CameraButtonView(cameraViewModel: $viewModel.cameraViewModel)
                     
                     Button(action: {
-                        bingoViewModel.callNewTurn()
-                        if bingoViewModel.checkVictory(){
-                            showConfetti = true
-                        }
+                        viewModel.newTurn()
                     }) {
                         Image(systemName: "laser.burst")
                             .resizable()
@@ -79,7 +73,7 @@ struct InitialView: View {
             }
             .padding()
         }
-        .environmentObject(bingoViewModel)
+        .environmentObject(viewModel.bingoViewModel)
     }
     
 }
