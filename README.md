@@ -46,5 +46,5 @@ Special thanks to <a href="https://github.com/simibac/ConfettiSwiftUI" target="_
 <br>
 
 ## Author
-Jaide Fernando Zardin<br>
+<a href="https://github.com/JaideZrdn" target="_blank">Jaide Fernando de Carvalho Zardin</a><br>
 Luana Rafaela Gerber<br>
