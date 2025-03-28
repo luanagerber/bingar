@@ -41,6 +41,10 @@ Run with Xcode on your iPhone
 </p>
 <br>
 
+## Third-Part Contents
+Special thanks to <a href="https://github.com/simibac/ConfettiSwiftUI" target="_blank">ConfettiSwiftUI</a> for the Confetti's Effects.
+
+
 ## Author
 Jaide Fernando Zardin
 Luana Rafaela Gerber<br>
