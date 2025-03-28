@@ -1,5 +1,5 @@
 # bIngAr
-This repository contains information about bIngAr, a POC developed to explore CreateML, CoreML and Apple frameworks.<br>
+This repository contains bIngAr, a POC developed to explore CreateML, CoreML and Apple frameworks.<br>
 
 ### About
 bIngAr is a POC that allows you to recognize bingo cards using an object identification model, then extract the numbers from the card and pass them on to the UI, using Apple's Vision framework. Using Apple's Speech framework, the numbers can be called and automatically marked on the card. This is how our initial idea of playing bingo using an app with artificial intelligence resources was validated.<br>
