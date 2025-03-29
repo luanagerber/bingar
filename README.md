@@ -13,13 +13,14 @@ bIngAr is a POC that allows you to recognize bingo cards using an object identif
 - Vision Framework
 - Speech Framework
 - Xcode
+- GitHub
 <br>
 
 ## Development Skills
 - Training a model with CreateML
 - Using a CoreML model within an App.
+- MVVM architecture
 - SwiftUI
-- GitHub
 <br>
 
 ## Features
