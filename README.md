@@ -52,7 +52,7 @@ Run with Xcode on your iPhone
 <br>
 
 ## Third-Part Contents
-Special thanks to <a href="https://github.com/simibac/ConfettiSwiftUI" target="_blank">ConfettiSwiftUI</a> for the Confetti's Effects. <a href="https://github.com/simibac/ConfettiSwiftUI/blob/77ce21c82cc5fa608ac921a0dea09dd85b5432c7/LICENSE">Licence Here</a>.<br>
+Special thanks to <a href="https://github.com/simibac/ConfettiSwiftUI" target="_blank">ConfettiSwiftUI</a> for the Confetti's Effects. <a href="https://github.com/simibac/ConfettiSwiftUI/blob/77ce21c82cc5fa608ac921a0dea09dd85b5432c7/LICENSE">License Here</a>.<br>
 <br>
 <br>
 
