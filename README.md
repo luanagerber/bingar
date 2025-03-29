@@ -34,7 +34,7 @@ bIngAr is a POC that allows you to recognize bingo cards using an object identif
 ## How to Run
 Prerequisites: You must have Xcode installed on your macOS and an iPhone running iOS 18.2 at least.
 
-Clone this repository on Xcode: https://github.com/luanagerber/bingar.git
+Clone this repository on Xcode: https://github.com/luanagerber/bingar.git<br>
 Run with Xcode on your iPhone
 <br>
 <br>
