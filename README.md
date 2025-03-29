@@ -1,5 +1,5 @@
 # bIngAr
-This repository contains bIngAr, a POC developed to explore CreateML, CoreML and Apple frameworks.<br>
+This repository contains bIngAr, a Proof of Concept (POC) developed to explore CreateML, CoreML and Apple frameworks.<br>
 
 ![bannerHQ 001](https://github.com/user-attachments/assets/f1633669-ac15-4128-8ca9-08ff3a7fb16e)
 
